@@ -4,7 +4,7 @@
  */
 
 // Edge runtime detection
-const isEdgeRuntime = typeof globalThis.EdgeRuntime === 'string' ||
+const isEdgeRuntime = typeof (globalThis as any).EdgeRuntime === 'string' ||
                       process.env.NEXT_RUNTIME === 'edge' ||
                       typeof process.versions?.node === 'undefined'
 
@@ -91,9 +91,14 @@ function getWinstonLogger() {
   // Delay winston initialization until actually needed
   if (typeof window === 'undefined' && !isEdgeRuntime) {
     try {
+      // Dynamic imports for Node.js-only modules (not available in edge runtime)
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const winston = require('winston')
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const DailyRotateFile = require('winston-daily-rotate-file')
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const path = require('path')
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const fs = require('fs')
 
       const logLevels = {
@@ -449,8 +454,10 @@ export const logger = {
   verbose: log.verbose,
   silly: log.silly,
   log: (level: string, message: string, meta?: any) => {
-    const logFn = log[level as keyof typeof log]
-    if (typeof logFn === 'function') {
+    // Only use basic log levels for the generic log method
+    const basicLevels = ['error', 'warn', 'info', 'debug', 'verbose', 'silly'] as const
+    if (basicLevels.includes(level as any)) {
+      const logFn = log[level as keyof Pick<typeof log, 'error' | 'warn' | 'info' | 'debug' | 'verbose' | 'silly'>]
       logFn(message, meta)
     } else {
       log.info(message, meta)

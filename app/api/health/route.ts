@@ -28,7 +28,7 @@ interface HealthStatus {
  * GET /api/health
  * Health check endpoint for monitoring
  */
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   const startTime = Date.now()
   const health: HealthStatus = {
     status: 'ok',
@@ -118,6 +118,8 @@ export async function GET(request: NextRequest) {
 
     // Add version info from package.json
     try {
+      // Dynamic import to avoid ESLint require() error
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const packageJson = require('../../../package.json')
       health.version = packageJson.version
     } catch {
