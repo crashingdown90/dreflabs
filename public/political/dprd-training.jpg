@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-dprd-training.jpg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891B2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#14B8A6;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="grid-dprd-training.jpg" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background gradient -->
+  <rect width="1200" height="630" fill="url(#grad-dprd-training.jpg)"/>
+  
+  <!-- Grid pattern -->
+  <rect width="1200" height="630" fill="url(#grid-dprd-training.jpg)"/>
+  
+  <!-- Icon -->
+  <text x="600" y="275" font-size="120" text-anchor="middle" fill="rgba(255,255,255,0.9)">
+    📚
+  </text>
+  
+  <!-- Label -->
+  <text x="600" y="395" font-size="48" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif">
+    Team Training
+  </text>
+  
+  <!-- Watermark -->
+  <text x="600" y="590" font-size="20" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Arial, sans-serif">
+    Dref Labs Political Consulting
+  </text>
+</svg>

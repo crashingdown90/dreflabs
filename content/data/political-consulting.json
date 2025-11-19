@@ -1,0 +1,317 @@
+[
+  {
+    "id": "gubernur-jateng-2024",
+    "slug": "gubernur-jateng-2024",
+    "title": "Gubernur Jawa Tengah 2024",
+    "client": "Kandidat Gubernur (Confidential)",
+    "year": "2024",
+    "region": "Jawa Tengah",
+    "type": "Gubernatorial Election",
+    "status": "Completed",
+    "result": "Won - 54.3% votes",
+    "coverImage": "/political/jateng-cover.png",
+    "thumbnail": "/political/jateng-thumb.png",
+    "description": "Strategi pemenangan pemilihan Gubernur Jawa Tengah dengan pendekatan data-driven dan teknologi AI untuk analisis sentimen publik.",
+    "challenge": "Kandidat memiliki elektabilitas rendah (18%) di awal kampanye dengan tingkat awareness yang terbatas di daerah rural. Kompetitor memiliki mesin politik yang kuat dan dukungan finansial besar.",
+    "solution": "Mengimplementasikan strategi 3-pilar: (1) Data Analytics untuk targeting pemilih, (2) Digital Campaign untuk meningkatkan awareness, (3) Ground Movement untuk mobilisasi grassroots.",
+    "services": [
+      "Political Branding & Positioning",
+      "Data-Driven Voter Targeting",
+      "Social Media Analytics",
+      "Campaign Strategy & Execution",
+      "Sentiment Analysis & Monitoring",
+      "Ground Team Coordination"
+    ],
+    "technologies": [
+      "AI Sentiment Analysis",
+      "Big Data Analytics",
+      "Geospatial Mapping",
+      "Social Media Monitoring",
+      "Predictive Modeling",
+      "Real-time Dashboard"
+    ],
+    "methodology": [
+      {
+        "phase": "Research & Analysis",
+        "duration": "2 months",
+        "activities": [
+          "Voter demographic analysis across 35 districts",
+          "Competitor SWOT analysis",
+          "Historical voting pattern analysis",
+          "Social media sentiment baseline",
+          "Focus group discussions in 10 key areas"
+        ]
+      },
+      {
+        "phase": "Strategy Development",
+        "duration": "1 month",
+        "activities": [
+          "Political positioning & messaging framework",
+          "Target voter segmentation (8 personas)",
+          "Channel strategy (digital + traditional)",
+          "Budget allocation optimization",
+          "Risk mitigation planning"
+        ]
+      },
+      {
+        "phase": "Campaign Execution",
+        "duration": "4 months",
+        "activities": [
+          "Daily social media monitoring & response",
+          "Weekly sentiment analysis reports",
+          "Bi-weekly strategy adjustment",
+          "Ground team coordination (500+ volunteers)",
+          "Real-time vote prediction modeling"
+        ]
+      },
+      {
+        "phase": "Final Push",
+        "duration": "2 weeks",
+        "activities": [
+          "Micro-targeting swing voters",
+          "Get-out-the-vote (GOTV) operations",
+          "Last-mile mobilization",
+          "Real-time monitoring on election day"
+        ]
+      }
+    ],
+    "results": [
+      {
+        "metric": "Elektabilitas",
+        "before": "18%",
+        "after": "54.3%",
+        "improvement": "+36.3%"
+      },
+      {
+        "metric": "Social Media Reach",
+        "before": "50K followers",
+        "after": "850K followers",
+        "improvement": "+1600%"
+      },
+      {
+        "metric": "Positive Sentiment",
+        "before": "32%",
+        "after": "71%",
+        "improvement": "+39%"
+      },
+      {
+        "metric": "Voter Turnout (Target Areas)",
+        "before": "65%",
+        "after": "82%",
+        "improvement": "+17%"
+      }
+    ],
+    "testimonial": {
+      "quote": "Drefan's data-driven approach transformed our campaign. The real-time analytics and strategic adjustments were game-changers.",
+      "author": "Campaign Manager",
+      "role": "Jateng Gubernatorial Campaign 2024"
+    },
+    "gallery": [
+      "/political/jateng-dashboard.png",
+      "/political/jateng-rally.png",
+      "/political/jateng-team.png",
+      "/political/jateng-analytics.png"
+    ]
+  },
+  {
+    "id": "walikota-semarang-2023",
+    "slug": "walikota-semarang-2023",
+    "title": "Walikota Semarang 2023",
+    "client": "Incumbent Mayor",
+    "year": "2023",
+    "region": "Semarang",
+    "type": "Mayoral Election",
+    "status": "Completed",
+    "result": "Won - 62.1% votes",
+    "coverImage": "/political/semarang-cover.png",
+    "thumbnail": "/political/semarang-thumb.png",
+    "description": "Re-election campaign dengan fokus pada digital transformation dan youth engagement melalui platform teknologi.",
+    "challenge": "Incumbent fatigue setelah 1 periode, kompetitor muda dengan dukungan kuat dari generasi milenial, isu-isu lokal yang kompleks.",
+    "solution": "Strategi 'Digital First' dengan memanfaatkan teknologi untuk transparansi, engagement, dan mobilisasi. Fokus pada achievement storytelling dan future vision.",
+    "services": [
+      "Incumbent Repositioning",
+      "Digital Campaign Management",
+      "Youth Voter Engagement",
+      "Crisis Management",
+      "Performance Analytics",
+      "Coalition Building"
+    ],
+    "technologies": [
+      "WhatsApp Broadcast System",
+      "Mobile Campaign App",
+      "Live Polling Dashboard",
+      "Chatbot for Q&A",
+      "Video Analytics",
+      "Micro-targeting Ads"
+    ],
+    "methodology": [
+      {
+        "phase": "Baseline Assessment",
+        "duration": "1 month",
+        "activities": [
+          "Performance audit (first term)",
+          "Public perception survey",
+          "Competitor intelligence",
+          "Digital footprint analysis"
+        ]
+      },
+      {
+        "phase": "Digital Transformation",
+        "duration": "2 months",
+        "activities": [
+          "Campaign app development",
+          "Social media revamp",
+          "Content production (100+ videos)",
+          "Influencer partnership program"
+        ]
+      },
+      {
+        "phase": "Engagement Campaign",
+        "duration": "3 months",
+        "activities": [
+          "Town hall meetings (virtual + physical)",
+          "Youth ambassador program",
+          "Achievement showcase campaign",
+          "Issue-based micro-campaigns"
+        ]
+      }
+    ],
+    "results": [
+      {
+        "metric": "Vote Share",
+        "before": "48% (2018)",
+        "after": "62.1%",
+        "improvement": "+14.1%"
+      },
+      {
+        "metric": "Youth Voter Support",
+        "before": "35%",
+        "after": "68%",
+        "improvement": "+33%"
+      },
+      {
+        "metric": "Digital Engagement",
+        "before": "120K interactions",
+        "after": "2.3M interactions",
+        "improvement": "+1817%"
+      },
+      {
+        "metric": "Campaign App Downloads",
+        "before": "0",
+        "after": "145K",
+        "improvement": "New"
+      }
+    ],
+    "testimonial": {
+      "quote": "The digital strategy was brilliant. We reached voters we never could have reached with traditional methods.",
+      "author": "Mayor of Semarang",
+      "role": "Client"
+    },
+    "gallery": [
+      "/political/semarang-app.png",
+      "/political/semarang-townhall.png",
+      "/political/semarang-youth.png"
+    ]
+  },
+  {
+    "id": "dprd-coalition-2024",
+    "slug": "dprd-coalition-2024",
+    "title": "DPRD Coalition Strategy 2024",
+    "client": "Political Party Coalition",
+    "year": "2024",
+    "region": "Multi-District",
+    "type": "Legislative Election",
+    "status": "Completed",
+    "result": "15 of 18 candidates won",
+    "coverImage": "/political/dprd-cover.png",
+    "thumbnail": "/political/dprd-thumb.png",
+    "description": "Strategi koalisi untuk 18 kandidat DPRD di berbagai daerah pemilihan dengan optimasi resource allocation dan micro-targeting.",
+    "challenge": "Limited budget untuk 18 kandidat, diverse electoral districts dengan karakteristik berbeda, koordinasi multi-tim yang kompleks.",
+    "solution": "Centralized data platform untuk resource optimization, standardized campaign toolkit, dan AI-powered targeting untuk efisiensi maksimal.",
+    "services": [
+      "Multi-Candidate Strategy",
+      "Resource Optimization",
+      "Centralized Data Platform",
+      "Campaign Toolkit Development",
+      "Cross-District Coordination",
+      "Performance Monitoring"
+    ],
+    "technologies": [
+      "Centralized Campaign CRM",
+      "Resource Allocation Algorithm",
+      "Multi-District Analytics",
+      "Automated Reporting System",
+      "Shared Content Library",
+      "Performance Dashboard"
+    ],
+    "methodology": [
+      {
+        "phase": "District Analysis",
+        "duration": "1 month",
+        "activities": [
+          "18 district profiling",
+          "Candidate-district matching",
+          "Resource requirement mapping",
+          "Competition analysis per district"
+        ]
+      },
+      {
+        "phase": "Platform Development",
+        "duration": "1.5 months",
+        "activities": [
+          "CRM system setup",
+          "Campaign toolkit creation",
+          "Training program for 18 teams",
+          "Communication protocol establishment"
+        ]
+      },
+      {
+        "phase": "Coordinated Execution",
+        "duration": "3 months",
+        "activities": [
+          "Weekly cross-team sync",
+          "Resource reallocation based on performance",
+          "Best practice sharing",
+          "Centralized crisis management"
+        ]
+      }
+    ],
+    "results": [
+      {
+        "metric": "Win Rate",
+        "before": "N/A",
+        "after": "83.3% (15/18)",
+        "improvement": "Above target"
+      },
+      {
+        "metric": "Cost per Win",
+        "before": "Projected: 450M",
+        "after": "Actual: 280M",
+        "improvement": "-38%"
+      },
+      {
+        "metric": "Campaign Efficiency",
+        "before": "N/A",
+        "after": "92% resource utilization",
+        "improvement": "Optimal"
+      },
+      {
+        "metric": "Average Vote Share",
+        "before": "Target: 25%",
+        "after": "Actual: 31.2%",
+        "improvement": "+6.2%"
+      }
+    ],
+    "testimonial": {
+      "quote": "Managing 18 campaigns simultaneously seemed impossible. Drefan's system made it not just possible, but highly effective.",
+      "author": "Coalition Chairman",
+      "role": "Political Party Leader"
+    },
+    "gallery": [
+      "/political/dprd-dashboard.png",
+      "/political/dprd-training.png",
+      "/political/dprd-coordination.png"
+    ]
+  }
+]
+

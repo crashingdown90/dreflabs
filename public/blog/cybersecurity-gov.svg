@@ -1,0 +1,36 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-blog-TECHNOLOGY" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#grad-blog-TECHNOLOGY)"/>
+  
+  <!-- Pattern -->
+  <circle cx="100" cy="100" r="200" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="1100" cy="530" r="250" fill="rgba(255,255,255,0.03)"/>
+  
+  <!-- Category badge -->
+  <rect x="80" y="80" width="200" height="50" rx="25" fill="rgba(255,255,255,0.2)"/>
+  <text x="180" y="113" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">TECHNOLOGY</text>
+  
+  <!-- Title -->
+  <text x="80" y="250" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="white" style="word-spacing: 100vw;">
+    <tspan x="80" dy="0">Cyber Security untuk</tspan>
+    <tspan x="80" dy="70">E-Government</tspan>
+  </text>
+  
+  <!-- Decorative line -->
+  <rect x="80" y="420" width="400" height="6" rx="3" fill="white" opacity="0.8"/>
+  
+  <!-- Author info -->
+  <circle cx="100" cy="520" r="30" fill="rgba(255,255,255,0.2)"/>
+  <text x="100" y="530" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">D</text>
+  <text x="150" y="530" font-family="Arial, sans-serif" font-size="24" fill="white">Drefan Madiawan</text>
+  
+  <!-- Blog icon -->
+  <text x="1050" y="150" font-size="120" fill="rgba(255,255,255,0.1)">📝</text>
+</svg>

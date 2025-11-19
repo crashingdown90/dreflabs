@@ -1,0 +1,82 @@
+[
+  {
+    "id": "big-data-consulting",
+    "title": "Big Data & Analytics Consulting",
+    "description": "Design and implement large-scale data processing and analytics solutions",
+    "icon": "database",
+    "deliverables": [
+      "Data architecture design and roadmap",
+      "Big data platform implementation (Hadoop, Spark)",
+      "Data lake and warehouse setup",
+      "ETL pipeline development",
+      "Analytics dashboard and reporting",
+      "Performance optimization and scaling"
+    ],
+    "industries": ["Government", "Finance", "Healthcare", "Telecommunications"],
+    "pricing": "Project-based, starting from consultation"
+  },
+  {
+    "id": "ai-ml-solutions",
+    "title": "AI & Machine Learning Solutions",
+    "description": "Develop intelligent systems using advanced AI and ML technologies",
+    "icon": "brain",
+    "deliverables": [
+      "AI/ML strategy and use case identification",
+      "Custom ML model development",
+      "Natural Language Processing (NLP) solutions",
+      "Computer vision applications",
+      "Predictive analytics implementation",
+      "Model deployment and MLOps setup"
+    ],
+    "industries": ["Government", "E-commerce", "Manufacturing", "Public Services"],
+    "pricing": "Custom quote based on complexity"
+  },
+  {
+    "id": "cyber-security",
+    "title": "Cyber Security Services",
+    "description": "Comprehensive security assessment and implementation",
+    "icon": "shield",
+    "deliverables": [
+      "Security architecture design",
+      "Penetration testing and vulnerability assessment",
+      "Security policy and framework development",
+      "SIEM implementation and SOC setup",
+      "Incident response planning",
+      "Security training and awareness"
+    ],
+    "industries": ["Government", "Finance", "Healthcare", "Critical Infrastructure"],
+    "pricing": "Service-based or retainer options"
+  },
+  {
+    "id": "e-government",
+    "title": "E-Government Digital Transformation",
+    "description": "End-to-end digital government solutions and transformation consulting",
+    "icon": "building",
+    "deliverables": [
+      "Digital transformation strategy",
+      "E-government platform development",
+      "Citizen service portal implementation",
+      "Interoperability framework",
+      "Digital identity and authentication",
+      "Change management and training"
+    ],
+    "industries": ["National Government", "Regional Government", "Municipalities"],
+    "pricing": "Program-based pricing"
+  },
+  {
+    "id": "it-governance",
+    "title": "Government IT Governance",
+    "description": "IT policy, standards, and governance framework for public sector",
+    "icon": "file-text",
+    "deliverables": [
+      "IT governance framework development",
+      "Policy and standards creation",
+      "Compliance assessment and auditing",
+      "Risk management framework",
+      "IT portfolio management",
+      "Vendor and procurement governance"
+    ],
+    "industries": ["Government Agencies", "Public Institutions"],
+    "pricing": "Consultation-based"
+  }
+]

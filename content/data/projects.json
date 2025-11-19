@@ -1,0 +1,117 @@
+[
+  {
+    "slug": "national-data-lake",
+    "title": "National Data Lake Implementation",
+    "description": "Architected and implemented a large-scale data lake for a national government agency",
+    "longDescription": "Led the design and implementation of a comprehensive data lake solution processing petabytes of government data from multiple agencies.",
+    "coverImage": "/projects/data-lake.png",
+    "images": ["/projects/data-lake.png", "/projects/data-lake-2.jpg"],
+    "category": "Big Data",
+    "clientType": "National Government Agency",
+    "duration": "18 months",
+    "role": "Chief Architect",
+    "teamSize": 12,
+    "year": "2022-2023",
+    "technologies": [
+      { "name": "Apache Hadoop", "category": "backend" },
+      { "name": "Apache Spark", "category": "analytics" },
+      { "name": "Kafka", "category": "backend" },
+      { "name": "AWS S3", "category": "devops" },
+      { "name": "Kubernetes", "category": "devops" }
+    ],
+    "problem": "Multiple government agencies were maintaining siloed data systems with no centralized analytics capability, leading to inefficiencies and inability to gain cross-agency insights.",
+    "solution": "Designed and implemented a scalable data lake architecture that ingests data from 20+ agencies, implements data governance, and provides unified analytics capabilities.",
+    "results": [
+      { "metric": "Data Integration", "value": "20+ Agencies", "description": "Successfully integrated data from multiple sources" },
+      { "metric": "Processing Speed", "value": "10x Faster", "description": "Improved data processing and query performance" },
+      { "metric": "Cost Reduction", "value": "40%", "description": "Reduced infrastructure and operational costs" }
+    ],
+    "featured": true
+  },
+  {
+    "slug": "ai-powered-sentiment-analysis",
+    "title": "AI-Powered Social Media Sentiment Analysis",
+    "description": "Real-time sentiment analysis system for monitoring public opinion on government policies",
+    "longDescription": "Developed an AI-powered platform that analyzes millions of social media posts in real-time to provide insights on public sentiment regarding government policies and initiatives.",
+    "coverImage": "/projects/sentiment-analysis.png",
+    "images": ["/projects/sentiment-analysis.png"],
+    "category": "AI/ML",
+    "clientType": "Government Communications Office",
+    "duration": "12 months",
+    "role": "Lead Data Scientist",
+    "teamSize": 8,
+    "year": "2023",
+    "technologies": [
+      { "name": "Python", "category": "backend" },
+      { "name": "TensorFlow", "category": "analytics" },
+      { "name": "NLP", "category": "analytics" },
+      { "name": "Elasticsearch", "category": "database" },
+      { "name": "React", "category": "frontend" }
+    ],
+    "problem": "Government needed real-time insights into public sentiment and emerging issues to respond quickly and effectively to citizen concerns.",
+    "solution": "Built an NLP-based sentiment analysis platform that processes social media data in real-time, identifies trends, and alerts decision-makers to emerging issues.",
+    "results": [
+      { "metric": "Posts Analyzed", "value": "5M+ Daily", "description": "Real-time analysis of social media content" },
+      { "metric": "Response Time", "value": "80% Faster", "description": "Improved response time to public concerns" },
+      { "metric": "Accuracy", "value": "92%", "description": "Sentiment classification accuracy" }
+    ],
+    "featured": true
+  },
+  {
+    "slug": "secure-e-government-portal",
+    "title": "Secure E-Government Citizen Portal",
+    "description": "End-to-end secure digital service portal for 50+ government services",
+    "longDescription": "Designed and implemented a comprehensive e-government portal providing citizens with secure access to government services, documents, and information.",
+    "coverImage": "/projects/e-gov-portal.png",
+    "images": ["/projects/e-gov-portal.png"],
+    "category": "E-Government",
+    "clientType": "Regional Government",
+    "duration": "15 months",
+    "role": "Solution Architect & Security Lead",
+    "teamSize": 15,
+    "year": "2021-2022",
+    "technologies": [
+      { "name": "Next.js", "category": "frontend" },
+      { "name": "Node.js", "category": "backend" },
+      { "name": "PostgreSQL", "category": "database" },
+      { "name": "OAuth 2.0", "category": "other" },
+      { "name": "Docker", "category": "devops" }
+    ],
+    "problem": "Citizens had to visit multiple government offices for different services, leading to long wait times and inefficiencies.",
+    "solution": "Created a unified digital portal with secure authentication, integrated 50+ government services, and implemented end-to-end encryption for sensitive transactions.",
+    "results": [
+      { "metric": "Services Online", "value": "50+", "description": "Government services digitized" },
+      { "metric": "User Adoption", "value": "2M+ Citizens", "description": "Active registered users" },
+      { "metric": "Service Time", "value": "70% Reduction", "description": "Average time to complete services" }
+    ],
+    "featured": true
+  },
+  {
+    "slug": "cyber-security-framework",
+    "title": "National Cyber Security Framework",
+    "description": "Comprehensive cyber security framework and implementation for critical infrastructure",
+    "longDescription": "Led the development and implementation of a national cyber security framework protecting critical government infrastructure and services.",
+    "coverImage": "/projects/cybersecurity.png",
+    "images": ["/projects/cybersecurity.png"],
+    "category": "Cyber Security",
+    "clientType": "National Security Agency",
+    "duration": "24 months",
+    "role": "Principal Security Architect",
+    "teamSize": 20,
+    "year": "2020-2022",
+    "technologies": [
+      { "name": "SIEM", "category": "other" },
+      { "name": "Zero Trust Architecture", "category": "other" },
+      { "name": "Threat Intelligence", "category": "other" },
+      { "name": "Security Orchestration", "category": "other" }
+    ],
+    "problem": "Critical government infrastructure lacked comprehensive security framework and faced increasing cyber threats.",
+    "solution": "Developed and implemented zero-trust security architecture, established SOC, and deployed advanced threat detection and response systems.",
+    "results": [
+      { "metric": "Threat Detection", "value": "99.5%", "description": "Advanced persistent threat detection rate" },
+      { "metric": "Response Time", "value": "15 Minutes", "description": "Average incident response time" },
+      { "metric": "Vulnerabilities", "value": "85% Reduction", "description": "Critical vulnerabilities mitigated" }
+    ],
+    "featured": true
+  }
+]

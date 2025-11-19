@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://dreflabs.com/sitemap.xml
+

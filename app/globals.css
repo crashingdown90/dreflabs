@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-dark-border;
+  }
+
+  body {
+    @apply bg-dark-bg text-gray-100 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  /* Reduced Motion Support for Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Glassmorphism utility */
+  .glass {
+    @apply bg-dark-secondary/50 backdrop-blur-md border border-dark-border;
+  }
+
+  .glass-strong {
+    @apply bg-dark-secondary/80 backdrop-blur-lg border border-dark-border;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  /* Glow effect */
+  .glow {
+    @apply shadow-lg shadow-white/20;
+  }
+
+  /* Animated pulse slow */
+  .animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Particle animation */
+  .animate-particle {
+    animation: particle 2s ease-out infinite;
+  }
+
+  @keyframes particle {
+    0% {
+      transform: translate(0, 0) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--particle-x, 20px), var(--particle-y, -20px)) scale(1);
+      opacity: 0;
+    }
+  }
+
+  .glow-strong {
+    @apply shadow-xl shadow-white/40;
+  }
+
+  /* Wolf eye glow pulse animation */
+  .animate-eye-pulse {
+    animation: eyeGlowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes eyeGlowPulse {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    }
+    50% {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1));
+    }
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-dark-secondary;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-dark-border rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/50;
+  }
+
+  /* Code block styling */
+  pre {
+    @apply rounded-lg bg-dark-secondary p-4 overflow-x-auto custom-scrollbar;
+  }
+
+  code {
+    @apply text-white text-sm;
+  }
+
+  pre code {
+    @apply text-gray-100;
+  }
+
+  /* Link styling */
+  .prose a {
+    @apply text-white hover:text-gray-300 transition-colors underline;
+  }
+
+  /* Image styling */
+  .prose img {
+    @apply rounded-lg;
+  }
+
+  /* Blockquote styling */
+  .prose blockquote {
+    @apply border-l-4 border-white pl-4 italic text-gray-400;
+  }
+
+  /* Table styling */
+  .prose table {
+    @apply w-full border-collapse;
+  }
+
+  .prose th {
+    @apply bg-dark-secondary px-4 py-2 text-left font-semibold;
+  }
+
+  .prose td {
+    @apply border-t border-dark-border px-4 py-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+}
+
+/* Syntax highlighting (using highlight.js dark theme) */
+.hljs {
+  @apply bg-dark-secondary text-gray-100;
+}
+
+.hljs-comment,
+.hljs-quote {
+  @apply text-gray-500 italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  @apply text-primary;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  @apply text-white;
+}
+
+.hljs-string,
+.hljs-doctag {
+  @apply text-gray-300;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  @apply text-primary-light font-bold;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  @apply text-white;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  @apply text-primary font-normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  @apply text-gray-300;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  @apply text-white;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  @apply text-primary;
+}
+
+.hljs-meta {
+  @apply text-gray-500;
+}
+
+.hljs-deletion {
+  @apply bg-red-900/30;
+}
+
+.hljs-addition {
+  @apply bg-green-900/30;
+}
+
+.hljs-emphasis {
+  @apply italic;
+}
+
+.hljs-strong {
+  @apply font-bold;
+}

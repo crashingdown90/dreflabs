@@ -1,0 +1,42 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-Cyber Security Framework" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#grad-Cyber Security Framework)"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="1000" cy="100" r="150" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="200" cy="500" r="200" fill="rgba(255,255,255,0.05)"/>
+  
+  <!-- Content box -->
+  <rect x="80" y="150" width="1040" height="330" rx="20" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  
+  <!-- Icon -->
+  <text x="150" y="280" font-size="80" fill="white">🔒</text>
+  
+  <!-- Title -->
+  <text x="280" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">Cyber Security Framework</text>
+  
+  <!-- Subtitle -->
+  <text x="280" y="330" font-family="Arial, sans-serif" font-size="28" fill="rgba(255,255,255,0.8)">Enterprise Protection</text>
+  
+  <!-- Tech badge -->
+  <rect x="280" y="360" width="200" height="40" rx="20" fill="rgba(255,255,255,0.2)"/>
+  <text x="380" y="387" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">Next.js • TypeScript</text>
+  
+  <!-- Bottom text -->
+  <text x="600" y="580" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.6)" text-anchor="middle">Drefan Madiawan - Full-Stack Developer</text>
+</svg>

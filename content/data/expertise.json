@@ -1,0 +1,58 @@
+[
+  {
+    "id": "big-data",
+    "title": "Big Data & Analytics",
+    "description": "Design and implement large-scale data processing systems using Hadoop, Spark, and modern data lakes.",
+    "icon": "database",
+    "skills": ["Hadoop", "Spark", "Kafka", "Data Lakes", "ETL Pipelines"]
+  },
+  {
+    "id": "ai-ml",
+    "title": "Artificial Intelligence & ML",
+    "description": "Develop intelligent systems using machine learning, deep learning, and natural language processing.",
+    "icon": "brain",
+    "skills": ["TensorFlow", "PyTorch", "NLP", "Computer Vision", "Predictive Analytics"]
+  },
+  {
+    "id": "cyber-security",
+    "title": "Cyber Security",
+    "description": "Implement comprehensive security strategies, penetration testing, and threat intelligence solutions.",
+    "icon": "shield",
+    "skills": ["Penetration Testing", "Security Audits", "Threat Intelligence", "SIEM", "Incident Response"]
+  },
+  {
+    "id": "data-science",
+    "title": "Data Science & Visualization",
+    "description": "Transform complex data into actionable insights through advanced analytics and visualization.",
+    "icon": "chart",
+    "skills": ["Python", "R", "Tableau", "Power BI", "Statistical Analysis"]
+  },
+  {
+    "id": "social-analytics",
+    "title": "Social Media & Issue Analytics",
+    "description": "Monitor and analyze social media trends, sentiment analysis, and issue tracking for decision support.",
+    "icon": "message-square",
+    "skills": ["Sentiment Analysis", "Trend Monitoring", "Issue Tracking", "Social Listening", "Crisis Management"]
+  },
+  {
+    "id": "e-government",
+    "title": "E-Government Solutions",
+    "description": "Design and implement digital government platforms for improved public service delivery.",
+    "icon": "building",
+    "skills": ["Digital Services", "Citizen Portals", "Gov Cloud", "Interoperability", "Digital Identity"]
+  },
+  {
+    "id": "it-governance",
+    "title": "Government IT Governance",
+    "description": "Establish IT governance frameworks, policies, and standards for public sector organizations.",
+    "icon": "file-text",
+    "skills": ["IT Policy", "Standards Development", "Compliance", "Risk Management", "IT Frameworks"]
+  },
+  {
+    "id": "cloud-devops",
+    "title": "Cloud Architecture & DevOps",
+    "description": "Build scalable cloud infrastructure and implement CI/CD pipelines for efficient deployment.",
+    "icon": "cloud",
+    "skills": ["AWS", "Azure", "Docker", "Kubernetes", "CI/CD", "Infrastructure as Code"]
+  }
+]

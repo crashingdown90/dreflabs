@@ -1,0 +1,324 @@
+{
+  "portfolioProjects": [
+    {
+      "id": "export-import-platform",
+      "slug": "export-import-platform",
+      "title": "Export Import Trading Platform",
+      "category": "E-Commerce & Trading",
+      "client": "PT Global Trade Indonesia",
+      "year": "2023",
+      "duration": "6 months",
+      "status": "Live",
+      "featured": true,
+      "shortDescription": "Comprehensive B2B platform for international export-import trading with multi-currency support, logistics tracking, and automated documentation.",
+      "description": "Developed a full-stack export-import trading platform that connects Indonesian exporters with international buyers. The platform handles complex workflows including quotation management, purchase orders, shipping documentation, customs clearance tracking, and multi-currency payments. Integrated with major shipping carriers and payment gateways.",
+      "challenge": "Managing complex international trade workflows, multi-currency transactions, real-time shipping tracking, and automated generation of export documentation (Invoice, Packing List, Bill of Lading, Certificate of Origin).",
+      "solution": "Built a modular microservices architecture with separate services for order management, payment processing, logistics tracking, and document generation. Implemented real-time notifications via WebSocket and integrated with shipping APIs (DHL, FedEx, Maersk) for live tracking.",
+      "results": [
+        "Processed $5M+ in international transactions in first year",
+        "Reduced documentation processing time by 70%",
+        "Connected 150+ exporters with buyers in 25 countries",
+        "Achieved 99.8% uptime with zero payment failures"
+      ],
+      "technologies": [
+        "Next.js 14",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "AWS (EC2, S3, RDS)",
+        "Stripe",
+        "WebSocket",
+        "REST API",
+        "Tailwind CSS"
+      ],
+      "features": [
+        "Multi-vendor marketplace",
+        "Real-time quotation system",
+        "Multi-currency payment (USD, EUR, IDR, CNY)",
+        "Automated export documentation",
+        "Shipping & logistics tracking",
+        "Customs clearance management",
+        "Escrow payment system",
+        "Multi-language support (EN, ID, CN)",
+        "Admin dashboard with analytics",
+        "Mobile-responsive design"
+      ],
+      "screenshots": [
+        "/portfolio/export-import/dashboard.png",
+        "/portfolio/export-import/marketplace.png",
+        "/portfolio/export-import/quotation.png",
+        "/portfolio/export-import/tracking.png",
+        "/portfolio/export-import/documents.png"
+      ],
+      "url": "https://globaltrade.example.com",
+      "testimonial": {
+        "text": "The platform transformed our export business. We can now manage international orders efficiently and our buyers love the real-time tracking feature.",
+        "author": "Budi Santoso",
+        "position": "CEO, PT Global Trade Indonesia"
+      }
+    },
+    {
+      "id": "manufacturing-erp",
+      "slug": "manufacturing-erp-system",
+      "title": "Manufacturing & Mining ERP System",
+      "category": "Enterprise Resource Planning",
+      "client": "PT Mineral Resources Indonesia",
+      "year": "2022-2023",
+      "duration": "12 months",
+      "status": "Live",
+      "featured": true,
+      "shortDescription": "Enterprise-grade ERP system for manufacturing and mining operations with inventory management, production planning, and supply chain optimization.",
+      "description": "Comprehensive ERP solution designed specifically for manufacturing and mining industries. The system integrates production planning, inventory management, procurement, quality control, maintenance scheduling, and financial reporting. Handles complex workflows from raw material sourcing to finished product delivery.",
+      "challenge": "Integrating multiple departments (production, procurement, quality control, maintenance, finance) into a single unified system while maintaining real-time data synchronization across mining sites and manufacturing facilities.",
+      "solution": "Developed a modular ERP architecture with microservices for each department. Implemented offline-first capabilities for remote mining sites with automatic sync when connectivity is restored. Used event-driven architecture for real-time updates across all modules.",
+      "results": [
+        "Reduced inventory holding costs by 35%",
+        "Improved production efficiency by 28%",
+        "Decreased equipment downtime by 40% through predictive maintenance",
+        "Achieved 99.9% data accuracy across all modules",
+        "ROI achieved within 18 months"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "RabbitMQ",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "GraphQL",
+        "Material-UI"
+      ],
+      "features": [
+        "Production planning & scheduling",
+        "Inventory management (raw materials, WIP, finished goods)",
+        "Procurement & vendor management",
+        "Quality control & testing",
+        "Equipment maintenance scheduling",
+        "Supply chain optimization",
+        "Financial accounting & reporting",
+        "HR & payroll integration",
+        "Real-time dashboards & analytics",
+        "Mobile app for field operations",
+        "Offline mode for remote sites",
+        "Multi-site management"
+      ],
+      "screenshots": [
+        "/portfolio/manufacturing/dashboard.png",
+        "/portfolio/manufacturing/production.png",
+        "/portfolio/manufacturing/inventory.png",
+        "/portfolio/manufacturing/procurement.png",
+        "/portfolio/manufacturing/analytics.png"
+      ],
+      "url": null,
+      "testimonial": {
+        "text": "This ERP system revolutionized our operations. We now have complete visibility across all our mining sites and manufacturing facilities in real-time.",
+        "author": "Ir. Siti Nurhaliza",
+        "position": "Operations Director, PT Mineral Resources Indonesia"
+      }
+    },
+    {
+      "id": "oil-gas-governance",
+      "slug": "oil-gas-corporate-governance",
+      "title": "Oil & Gas Corporate Governance System",
+      "category": "Corporate Governance",
+      "client": "International Oil Corporation (Confidential)",
+      "year": "2023",
+      "duration": "8 months",
+      "status": "Live",
+      "featured": true,
+      "shortDescription": "Comprehensive corporate governance and compliance management system for international oil & gas operations with regulatory reporting and audit trails.",
+      "description": "Developed a sophisticated corporate governance platform for a multinational oil & gas company operating in Indonesia. The system manages regulatory compliance, board meetings, shareholder communications, contract management, environmental reporting, and audit trails. Ensures compliance with Indonesian oil & gas regulations (SKK Migas) and international standards (ISO, API).",
+      "challenge": "Managing complex regulatory requirements across multiple jurisdictions, ensuring data security for sensitive corporate information, maintaining comprehensive audit trails, and integrating with legacy systems while meeting strict compliance deadlines.",
+      "solution": "Built a secure, role-based access control system with end-to-end encryption for sensitive data. Implemented automated compliance checking against regulatory frameworks, real-time alerts for upcoming deadlines, and comprehensive audit logging. Integrated with existing SAP and Oracle systems via secure APIs.",
+      "results": [
+        "100% compliance with SKK Migas reporting requirements",
+        "Reduced compliance reporting time by 60%",
+        "Zero compliance violations in first year of operation",
+        "Improved board meeting efficiency by 45%",
+        "Passed external audit with zero findings"
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "AWS (with VPC & encryption)",
+        "OAuth 2.0",
+        "JWT",
+        "PDF Generation",
+        "Digital Signatures",
+        "Blockchain (for audit trails)"
+      ],
+      "features": [
+        "Board meeting management",
+        "Regulatory compliance tracking",
+        "Contract lifecycle management",
+        "Environmental reporting (PROPER, AMDAL)",
+        "Shareholder communications",
+        "Document management with version control",
+        "Digital signature integration",
+        "Audit trail & logging",
+        "Automated compliance alerts",
+        "Regulatory reporting (SKK Migas, BKPM)",
+        "Risk management dashboard",
+        "Secure file sharing",
+        "Multi-language support (EN, ID)",
+        "Role-based access control (RBAC)"
+      ],
+      "screenshots": [
+        "/portfolio/oil-gas/dashboard.png",
+        "/portfolio/oil-gas/compliance.png",
+        "/portfolio/oil-gas/contracts.png",
+        "/portfolio/oil-gas/reporting.png",
+        "/portfolio/oil-gas/audit.png"
+      ],
+      "url": null,
+      "testimonial": {
+        "text": "The governance system has been instrumental in maintaining our compliance record. The automated alerts and comprehensive reporting have saved us countless hours.",
+        "author": "Confidential",
+        "position": "Compliance Director"
+      }
+    },
+    {
+      "id": "logistics-management",
+      "slug": "logistics-fleet-management",
+      "title": "Logistics & Fleet Management System",
+      "category": "Logistics & Transportation",
+      "client": "PT Logistik Nusantara",
+      "year": "2022",
+      "duration": "5 months",
+      "status": "Live",
+      "featured": false,
+      "shortDescription": "Real-time fleet tracking and logistics management platform with route optimization, driver management, and delivery tracking.",
+      "description": "Comprehensive logistics management system for a national transportation company. Features include real-time GPS tracking, route optimization, driver management, fuel monitoring, maintenance scheduling, and customer delivery tracking. Handles 500+ vehicles across Indonesia.",
+      "challenge": "Real-time tracking of 500+ vehicles across Indonesia's archipelago, optimizing routes to reduce fuel costs, managing driver schedules, and providing accurate delivery ETAs to customers.",
+      "solution": "Implemented GPS tracking with offline buffering for areas with poor connectivity. Used machine learning for route optimization based on historical traffic data. Developed mobile app for drivers with offline capabilities and automatic sync.",
+      "results": [
+        "Reduced fuel costs by 22%",
+        "Improved on-time delivery rate from 78% to 94%",
+        "Decreased vehicle maintenance costs by 18%",
+        "Increased fleet utilization by 31%"
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Redis",
+        "Socket.io",
+        "Google Maps API",
+        "React Native",
+        "Docker",
+        "AWS"
+      ],
+      "features": [
+        "Real-time GPS tracking",
+        "Route optimization",
+        "Driver management",
+        "Fuel monitoring",
+        "Maintenance scheduling",
+        "Delivery tracking",
+        "Customer notifications",
+        "Analytics dashboard",
+        "Mobile app for drivers",
+        "Geofencing alerts"
+      ],
+      "screenshots": [
+        "/portfolio/logistics/tracking.png",
+        "/portfolio/logistics/routes.png",
+        "/portfolio/logistics/fleet.png",
+        "/portfolio/logistics/analytics.png"
+      ],
+      "url": "https://logistiknusantara.example.com",
+      "testimonial": {
+        "text": "The fleet management system has transformed our operations. We now have complete visibility of our entire fleet in real-time.",
+        "author": "Ahmad Yani",
+        "position": "Operations Manager, PT Logistik Nusantara"
+      }
+    },
+    {
+      "id": "ecommerce-marketplace",
+      "slug": "ecommerce-marketplace-platform",
+      "title": "E-Commerce Marketplace Platform",
+      "category": "E-Commerce",
+      "client": "PT Digital Commerce Indonesia",
+      "year": "2021-2022",
+      "duration": "9 months",
+      "status": "Live",
+      "featured": false,
+      "shortDescription": "Multi-vendor e-commerce marketplace with payment gateway integration, seller dashboard, and advanced product search.",
+      "description": "Full-featured e-commerce marketplace platform connecting sellers and buyers. Includes seller onboarding, product management, order processing, payment integration, shipping integration, and customer reviews. Supports 1000+ sellers and processes 10,000+ orders monthly.",
+      "challenge": "Building a scalable platform that can handle high traffic during flash sales, ensuring secure payment processing, managing complex seller commission structures, and providing fast product search across millions of products.",
+      "solution": "Implemented microservices architecture with separate services for catalog, orders, payments, and notifications. Used Elasticsearch for fast product search, Redis for caching, and CDN for static assets. Implemented queue-based order processing for scalability.",
+      "results": [
+        "Onboarded 1,200+ sellers in first year",
+        "Processed 150,000+ orders with 99.9% success rate",
+        "Achieved 2-second average page load time",
+        "Handled 50,000 concurrent users during flash sales"
+      ],
+      "technologies": [
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "Elasticsearch",
+        "Redis",
+        "RabbitMQ",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "Midtrans",
+        "JNE API"
+      ],
+      "features": [
+        "Multi-vendor marketplace",
+        "Advanced product search & filters",
+        "Shopping cart & wishlist",
+        "Multiple payment methods",
+        "Shipping integration (JNE, J&T, SiCepat)",
+        "Seller dashboard",
+        "Order management",
+        "Customer reviews & ratings",
+        "Promotional campaigns",
+        "Analytics & reporting",
+        "Mobile-responsive design"
+      ],
+      "screenshots": [
+        "/portfolio/ecommerce/homepage.png",
+        "/portfolio/ecommerce/products.png",
+        "/portfolio/ecommerce/seller-dashboard.png",
+        "/portfolio/ecommerce/checkout.png"
+      ],
+      "url": "https://marketplace.example.com",
+      "testimonial": {
+        "text": "The platform is robust and scalable. We've grown from 100 to 1,200 sellers without any performance issues.",
+        "author": "Lisa Wijaya",
+        "position": "CEO, PT Digital Commerce Indonesia"
+      }
+    }
+  ],
+  "statistics": {
+    "totalProjects": 15,
+    "yearsExperience": 8,
+    "clientsSatisfied": 50,
+    "technologiesUsed": 35
+  },
+  "categories": [
+    "E-Commerce & Trading",
+    "Enterprise Resource Planning",
+    "Corporate Governance",
+    "Logistics & Transportation",
+    "E-Commerce",
+    "Healthcare",
+    "Education",
+    "Finance"
+  ]
+}
+

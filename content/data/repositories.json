@@ -1,0 +1,223 @@
+[
+  {
+    "id": "social-media-analytics",
+    "name": "AI Social Media Analytics",
+    "slug": "social-media-analytics",
+    "description": "Advanced AI-powered social media analytics platform for government agencies. Real-time sentiment analysis, trend detection, and crisis monitoring using NLP and machine learning.",
+    "longDescription": "A comprehensive social media analytics platform built specifically for government communications offices. Features include real-time sentiment analysis using IndoBERT, automated trend detection with DBSCAN clustering, network analysis for influence mapping, and crisis detection with automated alerts. Processes millions of posts daily across multiple platforms.",
+    "category": "Artificial Intelligence",
+    "tags": ["Python", "Machine Learning", "NLP", "Sentiment Analysis", "Big Data", "FastAPI", "React"],
+    "language": "Python",
+    "stars": 245,
+    "downloads": 1823,
+    "comments": 34,
+    "license": "MIT",
+    "version": "2.1.0",
+    "lastUpdated": "2024-11-10",
+    "createdDate": "2023-05-15",
+    "githubUrl": "https://github.com/drefan/social-media-analytics",
+    "demoUrl": "https://demo.dreflabs.com/social-analytics",
+    "downloadUrl": "/downloads/social-media-analytics-v2.1.0.zip",
+    "coverImage": "/opensource/social-analytics-cover.jpg",
+    "screenshots": [
+      "/opensource/social-analytics-dashboard.jpg",
+      "/opensource/social-analytics-sentiment.jpg",
+      "/opensource/social-analytics-network.jpg"
+    ],
+    "features": [
+      "Real-time sentiment analysis with 92% accuracy",
+      "Multi-platform data collection (Twitter, Facebook, Instagram)",
+      "Automated trend detection and clustering",
+      "Network analysis and influence mapping",
+      "Crisis detection with automated alerts",
+      "Customizable dashboards and reports",
+      "RESTful API for integration",
+      "Multi-language support (Indonesian, English)"
+    ],
+    "techStack": [
+      {
+        "name": "Python 3.11",
+        "purpose": "Backend & ML processing"
+      },
+      {
+        "name": "FastAPI",
+        "purpose": "REST API framework"
+      },
+      {
+        "name": "Transformers (HuggingFace)",
+        "purpose": "NLP models (IndoBERT)"
+      },
+      {
+        "name": "Scikit-learn",
+        "purpose": "Clustering & classification"
+      },
+      {
+        "name": "Apache Kafka",
+        "purpose": "Real-time data streaming"
+      },
+      {
+        "name": "PostgreSQL",
+        "purpose": "Relational database"
+      },
+      {
+        "name": "Redis",
+        "purpose": "Caching & session management"
+      },
+      {
+        "name": "React + TypeScript",
+        "purpose": "Frontend dashboard"
+      }
+    ],
+    "installation": "pip install -r requirements.txt && python setup.py install",
+    "usage": "python main.py --config config.yaml",
+    "documentation": "https://docs.dreflabs.com/social-analytics",
+    "codePreview": {
+      "file": "sentiment_analyzer.py",
+      "language": "python",
+      "code": "from transformers import pipeline\nimport pandas as pd\n\nclass SentimentAnalyzer:\n    def __init__(self, model=\"indolem/indobert-base-uncased\"):\n        self.analyzer = pipeline(\n            \"sentiment-analysis\",\n            model=model\n        )\n    \n    def analyze_batch(self, texts: list) -> pd.DataFrame:\n        \"\"\"Analyze sentiment for batch of texts\"\"\"\n        results = self.analyzer(texts)\n        return pd.DataFrame(results)\n    \n    def get_sentiment_score(self, text: str) -> float:\n        \"\"\"Get sentiment score (-1 to 1)\"\"\"\n        result = self.analyzer(text)[0]\n        score = result['score']\n        if result['label'] == 'NEGATIVE':\n            score = -score\n        return score"
+    }
+  },
+  {
+    "id": "big-data-pipeline",
+    "name": "Government Big Data Pipeline",
+    "slug": "big-data-pipeline",
+    "description": "Scalable big data processing pipeline for government data lakes. ETL framework supporting petabyte-scale data processing with Apache Spark and Hadoop.",
+    "longDescription": "Enterprise-grade big data pipeline designed for government data lakes. Handles ETL processes for structured and unstructured data from multiple sources. Features include data quality validation, automated schema evolution, incremental processing, and real-time monitoring. Successfully processes 10TB+ daily across multiple government agencies.",
+    "category": "Big Data",
+    "tags": ["Python", "Apache Spark", "Hadoop", "ETL", "Data Engineering", "Airflow", "Scala"],
+    "language": "Python",
+    "stars": 189,
+    "downloads": 956,
+    "comments": 28,
+    "license": "Apache 2.0",
+    "version": "3.0.2",
+    "lastUpdated": "2024-11-05",
+    "createdDate": "2022-08-20",
+    "githubUrl": "https://github.com/drefan/big-data-pipeline",
+    "demoUrl": null,
+    "downloadUrl": "/downloads/big-data-pipeline-v3.0.2.zip",
+    "coverImage": "/opensource/bigdata-pipeline-cover.jpg",
+    "screenshots": [
+      "/opensource/bigdata-pipeline-architecture.jpg",
+      "/opensource/bigdata-pipeline-monitoring.jpg"
+    ],
+    "features": [
+      "Petabyte-scale data processing",
+      "Multi-source data ingestion (RDBMS, NoSQL, APIs, Files)",
+      "Automated data quality validation",
+      "Schema evolution and versioning",
+      "Incremental and full refresh modes",
+      "Real-time monitoring and alerting",
+      "Apache Airflow orchestration",
+      "Fault-tolerant and auto-recovery"
+    ],
+    "techStack": [
+      {
+        "name": "Apache Spark 3.5",
+        "purpose": "Distributed data processing"
+      },
+      {
+        "name": "Apache Hadoop",
+        "purpose": "Distributed storage (HDFS)"
+      },
+      {
+        "name": "Apache Airflow",
+        "purpose": "Workflow orchestration"
+      },
+      {
+        "name": "Python 3.11",
+        "purpose": "ETL scripts & automation"
+      },
+      {
+        "name": "Scala",
+        "purpose": "Spark jobs"
+      },
+      {
+        "name": "Apache Kafka",
+        "purpose": "Real-time streaming"
+      },
+      {
+        "name": "PostgreSQL",
+        "purpose": "Metadata storage"
+      }
+    ],
+    "installation": "docker-compose up -d && ./scripts/setup.sh",
+    "usage": "airflow dags trigger data_pipeline --conf '{\"source\": \"database1\"}'",
+    "documentation": "https://docs.dreflabs.com/big-data-pipeline",
+    "codePreview": {
+      "file": "spark_etl.py",
+      "language": "python",
+      "code": "from pyspark.sql import SparkSession\nfrom pyspark.sql.functions import col, current_timestamp\n\nclass DataPipeline:\n    def __init__(self, app_name=\"ETL Pipeline\"):\n        self.spark = SparkSession.builder \\\n            .appName(app_name) \\\n            .config(\"spark.sql.adaptive.enabled\", \"true\") \\\n            .getOrCreate()\n    \n    def extract(self, source_path: str):\n        \"\"\"Extract data from source\"\"\"\n        return self.spark.read \\\n            .format(\"parquet\") \\\n            .load(source_path)\n    \n    def transform(self, df):\n        \"\"\"Apply transformations\"\"\"\n        return df \\\n            .filter(col(\"status\") == \"active\") \\\n            .withColumn(\"processed_at\", current_timestamp())\n    \n    def load(self, df, target_path: str):\n        \"\"\"Load data to target\"\"\"\n        df.write \\\n            .mode(\"overwrite\") \\\n            .partitionBy(\"date\") \\\n            .parquet(target_path)"
+    }
+  },
+  {
+    "id": "cyber-security-scanner",
+    "name": "Automated Security Scanner",
+    "slug": "cyber-security-scanner",
+    "description": "Comprehensive security vulnerability scanner for web applications and infrastructure. Automated penetration testing with detailed reports and remediation guidance.",
+    "longDescription": "Professional-grade security scanner combining multiple scanning techniques including OWASP Top 10 detection, SQL injection testing, XSS detection, and infrastructure vulnerability assessment. Features automated scheduling, detailed reporting with CVSS scoring, and integration with CI/CD pipelines.",
+    "category": "Cyber Security",
+    "tags": ["Python", "Security", "Penetration Testing", "OWASP", "DevSecOps", "Docker"],
+    "language": "Python",
+    "stars": 312,
+    "downloads": 2145,
+    "comments": 45,
+    "license": "GPL-3.0",
+    "version": "1.8.5",
+    "lastUpdated": "2024-11-12",
+    "createdDate": "2023-01-10",
+    "githubUrl": "https://github.com/drefan/security-scanner",
+    "demoUrl": "https://demo.dreflabs.com/security-scanner",
+    "downloadUrl": "/downloads/security-scanner-v1.8.5.zip",
+    "coverImage": "/opensource/security-scanner-cover.jpg",
+    "screenshots": [
+      "/opensource/security-scanner-dashboard.jpg",
+      "/opensource/security-scanner-report.jpg"
+    ],
+    "features": [
+      "OWASP Top 10 vulnerability detection",
+      "SQL injection and XSS testing",
+      "SSL/TLS configuration analysis",
+      "Port scanning and service detection",
+      "Automated scheduling and reporting",
+      "CVSS scoring and risk assessment",
+      "CI/CD pipeline integration",
+      "Detailed remediation guidance"
+    ],
+    "techStack": [
+      {
+        "name": "Python 3.11",
+        "purpose": "Core scanning engine"
+      },
+      {
+        "name": "Nmap",
+        "purpose": "Port scanning"
+      },
+      {
+        "name": "SQLMap",
+        "purpose": "SQL injection testing"
+      },
+      {
+        "name": "OWASP ZAP",
+        "purpose": "Web app scanning"
+      },
+      {
+        "name": "Docker",
+        "purpose": "Containerization"
+      },
+      {
+        "name": "FastAPI",
+        "purpose": "REST API"
+      }
+    ],
+    "installation": "docker pull dreflabs/security-scanner:latest",
+    "usage": "docker run -it dreflabs/security-scanner scan --target https://example.com",
+    "documentation": "https://docs.dreflabs.com/security-scanner",
+    "codePreview": {
+      "file": "vulnerability_scanner.py",
+      "language": "python",
+      "code": "import requests\nfrom typing import List, Dict\n\nclass VulnerabilityScanner:\n    def __init__(self, target_url: str):\n        self.target = target_url\n        self.vulnerabilities = []\n    \n    def scan_sql_injection(self, params: Dict) -> List[Dict]:\n        \"\"\"Test for SQL injection vulnerabilities\"\"\"\n        payloads = [\"' OR '1'='1\", \"1' UNION SELECT NULL--\"]\n        results = []\n        \n        for payload in payloads:\n            test_params = params.copy()\n            for key in test_params:\n                test_params[key] = payload\n                response = requests.get(self.target, params=test_params)\n                \n                if self._detect_sql_error(response.text):\n                    results.append({\n                        'type': 'SQL Injection',\n                        'severity': 'HIGH',\n                        'parameter': key,\n                        'payload': payload\n                    })\n        return results"
+    }
+  }
+]
+

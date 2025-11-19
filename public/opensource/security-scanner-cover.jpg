@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DB2777;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#grad)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Overlay -->
+  <rect width="1200" height="630" fill="rgba(0,0,0,0.3)"/>
+  
+  <!-- Icon -->
+  <text x="600" y="280" font-size="120" text-anchor="middle" fill="white" opacity="0.9">
+    🔒
+  </text>
+  
+  <!-- Title -->
+  <text x="600" y="380" font-size="48" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif">
+    Security Scanner
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="420" font-size="24" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial, sans-serif">
+    Open Source by DrefLabs
+  </text>
+  
+  <!-- Code Symbol -->
+  <text x="600" y="500" font-size="32" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="monospace">
+    &lt;/&gt;
+  </text>
+</svg>

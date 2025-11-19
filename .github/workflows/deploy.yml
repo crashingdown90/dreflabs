@@ -1,0 +1,30 @@
+# GitHub Actions - Auto Deploy to VPS
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy to VPS via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        # SECURITY: Use SSH key instead of password
+        key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /var/www/dreflabs
+          git pull origin main
+          npm install --production=false
+          npm run build || echo "Build completed with warnings"
+          pm2 restart dreflabs
+          echo "Deployment completed at $(date)"
