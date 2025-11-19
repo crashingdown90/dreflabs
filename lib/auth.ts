@@ -201,7 +201,7 @@ export function sanitizeUser(user: any) {
  */
 export async function verifyAuth(
   authHeader: string | null,
-  request?: Request
+  _request?: Request
 ): Promise<JWTPayload | null> {
   try {
     // Extract token from Authorization header
