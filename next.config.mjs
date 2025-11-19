@@ -1,3 +1,9 @@
+import createMDX from '@next/mdx'
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
@@ -22,18 +28,17 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-
 }
 
-const withMDX = require('@next/mdx')({
+const withMDX = createMDX({
   options: {
-    remarkPlugins: [require('remark-gfm')],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      require('rehype-slug'),
-      require('rehype-highlight'),
-      [require('rehype-autolink-headings'), { behavior: 'wrap' }],
+      rehypeSlug,
+      rehypeHighlight,
+      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
     ],
   },
 })
 
-module.exports = withMDX(nextConfig)
+export default withMDX(nextConfig)
