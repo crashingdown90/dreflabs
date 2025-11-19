@@ -199,8 +199,10 @@ export const logger = {
   verbose: log.verbose,
   silly: log.silly,
   log: (level: string, message: string, meta?: any) => {
-    const logFn = log[level as keyof typeof log]
-    if (typeof logFn === 'function') {
+    // Only use basic log levels for the generic log method
+    const basicLevels = ['error', 'warn', 'info', 'debug', 'verbose', 'silly'] as const
+    if (basicLevels.includes(level as any)) {
+      const logFn = log[level as keyof Pick<typeof log, 'error' | 'warn' | 'info' | 'debug' | 'verbose' | 'silly'>]
       logFn(message, meta)
     } else {
       log.info(message, meta)
