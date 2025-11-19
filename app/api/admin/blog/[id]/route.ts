@@ -19,7 +19,6 @@ export async function GET(
     if (!authResult.authorized) {
       return authResult.response!
     }
-    const payload = authResult.payload!
 
     const id = parseInt(params.id)
     if (isNaN(id)) {
