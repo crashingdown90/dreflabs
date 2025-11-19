@@ -8,7 +8,7 @@ import { getEnv } from './env'
 const env = getEnv()
 
 // Edge runtime detection
-const isEdgeRuntime = typeof globalThis.EdgeRuntime === 'string' ||
+const isEdgeRuntime = typeof (globalThis as any).EdgeRuntime === 'string' ||
                       process.env.NEXT_RUNTIME === 'edge' ||
                       typeof process.versions?.node === 'undefined'
 
