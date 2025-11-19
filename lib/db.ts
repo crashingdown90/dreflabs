@@ -169,7 +169,7 @@ if (typeof process !== 'undefined') {
   })
 
   process.on('unhandledRejection', (reason, promise) => {
-    log.error('Unhandled rejection at:', promise, 'reason:', reason)
+    log.error('Unhandled rejection', { promise, reason })
     closeDb()
     process.exit(1)
   })
