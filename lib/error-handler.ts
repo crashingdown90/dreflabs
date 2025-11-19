@@ -249,7 +249,7 @@ export function sanitizeErrorMessage(message: string): string {
  */
 export function createErrorResponse(
   message: string,
-  statusCode: number = 500,
+  _statusCode: number = 500,
   code?: string
 ): ApiError {
   const isDevelopment = process.env.NODE_ENV === 'development'
