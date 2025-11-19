@@ -4,7 +4,7 @@
  * Does NOT include Redis blacklist checking
  */
 
-import { SignJWT, jwtVerify } from 'jose'
+import { jwtVerify } from 'jose'
 import { JWTPayload } from '@/types/auth'
 import { getEnv } from './env'
 
