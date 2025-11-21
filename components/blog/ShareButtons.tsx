@@ -62,7 +62,7 @@ export default function ShareButtons({ url, title, description, className = '' }
       </button>
 
       <button
-        onClick={handleCopyLink)
+        onClick={handleCopyLink}
         className="p-2 rounded-lg bg-dark-tertiary border border-dark-border hover:border-white hover:bg-white/10 text-gray-400 hover:text-white transition-all duration-200 active:scale-95"
         aria-label="Copy link"
       >
