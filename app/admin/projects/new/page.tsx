@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { log } from '@/lib/logger'
 import { useRouter } from 'next/navigation'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
@@ -83,7 +82,7 @@ export default function NewProjectPage() {
       alert('Project created successfully!')
       router.push('/admin/projects')
     } catch (error: any) {
-      log.error('Error saving project:', error)
+      console.error('Error saving project:', error)
       alert(error.message || 'Error saving project. Please try again.')
     } finally {
       setSaving(false)

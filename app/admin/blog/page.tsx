@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { log } from '@/lib/logger'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
+import { CardSkeleton } from '@/components/ui/Loading'
 import { Plus, Edit, Trash2, Eye, Calendar, Tag, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { log } from '@/lib/logger'
 
 interface BlogPost {
   id: number
@@ -102,7 +103,7 @@ export default function AdminBlogPage() {
 
       alert('Blog post deleted successfully!')
       fetchPosts() // Refresh list
-    } catch (error: any) {
+    } catch (error) {
       log.error('Error deleting post:', error)
       alert('Error deleting post. Please try again.')
     }
@@ -177,9 +178,11 @@ export default function AdminBlogPage() {
       {/* Posts List */}
       <div className="space-y-4">
         {loading ? (
-          <div className="text-center py-12">
-            <p className="text-gray-400">Loading posts...</p>
-          </div>
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+          </>
         ) : filteredPosts.length === 0 ? (
           <div className="text-center py-12 bg-dark-secondary/50 border border-dark-border rounded-xl">
             <p className="text-gray-400 mb-4">No blog posts found</p>

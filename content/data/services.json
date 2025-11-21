@@ -1,5 +1,26 @@
 [
   {
+    "id": "web-development",
+    "title": "Professional Web Development",
+    "description": "Full-stack web development services with modern technologies and professional standards. We build scalable, secure, and high-performance web applications tailored to your business needs.",
+    "icon": "code",
+    "deliverables": [
+      "Custom website design and development",
+      "Responsive and mobile-friendly design",
+      "Modern tech stack (Next.js, React, TypeScript)",
+      "SEO optimization and performance tuning",
+      "Content Management System (CMS) integration",
+      "E-commerce solutions",
+      "Web application development",
+      "Maintenance and support",
+      "Security implementation and SSL setup",
+      "Analytics and tracking integration"
+    ],
+    "industries": ["Business", "E-commerce", "Portfolio", "Corporate", "Startups"],
+    "pricing": "Package-based starting from Rp 5.000.000",
+    "hasAssessmentForm": true
+  },
+  {
     "id": "big-data-consulting",
     "title": "Big Data & Analytics Consulting",
     "description": "Design and implement large-scale data processing and analytics solutions",

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Github, Linkedin, Mail, Twitter } from 'lucide-react'
 import RobotWolfLogo from '@/components/ui/RobotWolfLogo'
+import NewsletterForm from '@/components/forms/NewsletterForm'
 
 const footerLinks = {
   Navigation: [
@@ -83,6 +84,21 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="mt-12 pt-12 border-t border-dark-border" id="newsletter">
+          <div className="max-w-2xl mx-auto text-center mb-6">
+            <h3 className="text-2xl font-heading font-bold text-white mb-2">
+              Subscribe to Newsletter
+            </h3>
+            <p className="text-gray-400">
+              Get the latest insights on Big Data, AI, Cyber Security, and E-Government delivered to your inbox
+            </p>
+          </div>
+          <div className="max-w-md mx-auto">
+            <NewsletterForm variant="inline" />
+          </div>
         </div>
 
         {/* Bottom */}

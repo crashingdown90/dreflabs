@@ -3,7 +3,7 @@ import { log } from '@/lib/logger'
 import { getAdminByUsername, createSession, createLog, updateRateLimit, isBlocked, blockIdentifier } from '@/lib/admin-db'
 import { comparePassword, generateAccessToken, generateRefreshToken, getExpirationDate } from '@/lib/auth'
 import { validateCsrfToken } from '@/lib/security'
-import { LoginRequest, AuthResponse } from '@/types/auth'
+import { LoginRequest, AuthResponse, AuthErrorResponse } from '@/types/auth'
 
 // SECURITY: Strengthened rate limiting for login attempts
 const MAX_LOGIN_ATTEMPTS = 3 // Reduced from 5 to 3
@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
   try {
     // Validate CSRF token first
     if (!validateCsrfToken(request)) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid CSRF token' } as AuthResponse,
+      return NextResponse.json<AuthErrorResponse>(
+        { success: false, error: 'Invalid CSRF token' },
         { status: 403 }
       )
     }
@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
     const { username, password, rememberMe } = body
 
     if (!username || !password) {
-      return NextResponse.json(
-        { success: false, message: 'Username and password are required' } as AuthResponse,
+      return NextResponse.json<AuthErrorResponse>(
+        { success: false, error: 'Username and password are required' },
         { status: 400 }
       )
     }
@@ -37,8 +37,8 @@ export async function POST(request: NextRequest) {
     if (isBlocked(identifier)) {
       await createLog(null, 'LOGIN_BLOCKED', 'admin_user', username, ip, request.headers.get('user-agent') || undefined)
 
-      return NextResponse.json(
-        { success: false, message: 'Too many failed login attempts. Please try again later.' } as AuthResponse,
+      return NextResponse.json<AuthErrorResponse>(
+        { success: false, error: 'Too many failed login attempts. Please try again later.' },
         { status: 429 }
       )
     }
@@ -56,8 +56,8 @@ export async function POST(request: NextRequest) {
 
       await createLog(null, 'LOGIN_FAILED_USER_NOT_FOUND', 'admin_user', username, ip, request.headers.get('user-agent') || undefined)
 
-      return NextResponse.json(
-        { success: false, message: 'Invalid credentials' } as AuthResponse,
+      return NextResponse.json<AuthErrorResponse>(
+        { success: false, error: 'Invalid credentials' },
         { status: 401 }
       )
     }
@@ -75,8 +75,8 @@ export async function POST(request: NextRequest) {
 
       await createLog(admin.id, 'LOGIN_FAILED_INVALID_PASSWORD', 'admin_user', username, ip, request.headers.get('user-agent') || undefined)
 
-      return NextResponse.json(
-        { success: false, message: 'Invalid credentials' } as AuthResponse,
+      return NextResponse.json<AuthErrorResponse>(
+        { success: false, error: 'Invalid credentials' },
         { status: 401 }
       )
     }
@@ -85,8 +85,8 @@ export async function POST(request: NextRequest) {
     if (admin.is_active !== 1) {
       await createLog(admin.id, 'LOGIN_FAILED_INACTIVE', 'admin_user', username, ip, request.headers.get('user-agent') || undefined)
 
-      return NextResponse.json(
-        { success: false, message: 'Account is inactive' } as AuthResponse,
+      return NextResponse.json<AuthErrorResponse>(
+        { success: false, error: 'Account is inactive' },
         { status: 403 }
       )
     }
@@ -148,8 +148,8 @@ export async function POST(request: NextRequest) {
     return response
   } catch (error) {
     log.error('Login error:', error)
-    return NextResponse.json(
-      { success: false, message: 'Internal server error' } as AuthResponse,
+    return NextResponse.json<AuthErrorResponse>(
+      { success: false, error: 'Internal server error' },
       { status: 500 }
     )
   }

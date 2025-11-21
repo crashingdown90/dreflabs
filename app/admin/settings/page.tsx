@@ -1,48 +1,52 @@
 'use client'
 
 import { useState } from 'react'
-import { log } from '@/lib/logger'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { Save, Globe, Mail, Share2, Bell } from 'lucide-react'
+import { log } from '@/lib/logger'
+import { getSiteConfig } from '@/lib/site-config'
 
 export default function AdminSettingsPage() {
   const [saving, setSaving] = useState(false)
   const [activeTab, setActiveTab] = useState('general')
-  
+
+  // Load initial values from environment configuration
+  const siteConfig = getSiteConfig()
+
   const [settings, setSettings] = useState({
     // General Settings
-    siteName: 'Drefan Madiawan',
-    siteTagline: 'AI & Big Data Specialist | Political Strategist',
-    siteDescription: 'Expert in Artificial Intelligence, Big Data Analytics, and Political Campaign Strategy',
-    siteUrl: 'https://drefanmadiawan.com',
-    
+    siteName: siteConfig.siteName,
+    siteTagline: siteConfig.siteTagline,
+    siteDescription: siteConfig.siteDescription,
+    siteUrl: siteConfig.siteUrl,
+
     // Contact Info
-    email: 'contact@drefanmadiawan.com',
-    phone: '+62 xxx xxxx xxxx',
-    location: 'Jakarta, Indonesia',
-    
+    email: siteConfig.email,
+    phone: siteConfig.phone || '', // Empty string if not configured
+    location: siteConfig.location,
+
     // Social Media
-    twitter: 'https://twitter.com/drefanmadiawan',
-    linkedin: 'https://linkedin.com/in/drefanmadiawan',
-    github: 'https://github.com/drefanmadiawan',
-    instagram: 'https://instagram.com/drefanmadiawan',
-    
+    twitter: siteConfig.twitter,
+    linkedin: siteConfig.linkedin,
+    github: siteConfig.github,
+    instagram: siteConfig.instagram,
+
     // SEO Settings
-    metaTitle: 'Drefan Madiawan - AI & Big Data Specialist',
-    metaDescription: 'Expert in Artificial Intelligence, Big Data Analytics, Cyber Security, and Political Campaign Strategy',
-    metaKeywords: 'AI, Big Data, Machine Learning, Political Strategy, Data Analytics',
-    
+    metaTitle: siteConfig.metaTitle,
+    metaDescription: siteConfig.metaDescription,
+    metaKeywords: siteConfig.metaKeywords,
+
     // Analytics
-    googleAnalyticsId: '',
-    facebookPixelId: '',
-    
-    // Email Settings
+    googleAnalyticsId: siteConfig.googleAnalyticsId || '',
+    facebookPixelId: siteConfig.facebookPixelId || '',
+
+    // Email Settings (server-side only, not exposed via siteConfig)
     smtpHost: '',
     smtpPort: '587',
     smtpUser: '',
     smtpPassword: '',
-    
+
     // Notifications
     emailNotifications: true,
     commentNotifications: true,
@@ -52,7 +56,9 @@ export default function AdminSettingsPage() {
   const handleSave = async () => {
     setSaving(true)
     try {
-      // TODO: Implement save API
+      // NOTE: Settings are stored in environment variables for static config
+      // For dynamic settings, implement API endpoint: POST /api/admin/settings
+      // Store user preferences in database with settings table
       await new Promise(resolve => setTimeout(resolve, 1000))
       alert('Settings saved successfully!')
     } catch (error) {

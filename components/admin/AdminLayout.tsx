@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, ReactNode } from 'react'
-import { log } from '@/lib/logger'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
@@ -130,7 +129,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         router.refresh()
       }
     } catch (error) {
-      log.error('Logout error:', error)
+      console.error('Logout error:', error)
     } finally {
       setIsLoggingOut(false)
     }

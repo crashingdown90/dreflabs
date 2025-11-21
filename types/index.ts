@@ -138,9 +138,20 @@ export interface CommentFormData {
   content: string
 }
 
-export interface ApiResponse<T = unknown> {
-  success: boolean
-  message?: string
+// Success response type
+export interface ApiSuccessResponse<T = unknown> {
+  success: true
   data?: T
-  error?: string
+  message?: string
 }
+
+// Error response type
+export interface ApiErrorResponse {
+  success: false
+  error: string
+  details?: unknown
+  statusCode?: number
+}
+
+// Union type for API responses
+export type ApiResponse<T = unknown> = ApiSuccessResponse<T> | ApiErrorResponse

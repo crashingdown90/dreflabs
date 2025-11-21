@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { Database, Brain, Shield, Building2, FileText, CheckCircle } from 'lucide-react'
+import { Database, Brain, Shield, Building2, FileText, CheckCircle, Code2 } from 'lucide-react'
 import ScrollReveal from '@/components/animations/ScrollReveal'
 import Card, { CardContent } from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
+import WebAssessmentForm from '@/components/forms/WebAssessmentForm'
 import servicesData from '@/content/data/services.json'
 
 const iconMap = {
+  'code': Code2,
   'database': Database,
   'brain': Brain,
   'shield': Shield,
@@ -37,9 +39,10 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto space-y-8">
           {servicesData.map((service, index) => {
             const Icon = iconMap[service.icon as keyof typeof iconMap]
+            const hasForm = 'hasAssessmentForm' in service && service.hasAssessmentForm
             return (
               <ScrollReveal key={service.id} delay={index * 0.1}>
-                <Card hover glow className="p-8">
+                <Card hover glow className="p-8" id={service.id}>
                   <CardContent className="p-0">
                     <div className="flex flex-col md:flex-row gap-6">
                       <div className="flex-shrink-0">
@@ -82,9 +85,21 @@ export default function ServicesPage() {
                           </div>
                         </div>
 
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-400 text-sm mb-6">
                           <span className="font-semibold text-white">Pricing:</span> {service.pricing}
                         </p>
+
+                        {hasForm && (
+                          <div className="mt-8 pt-8 border-t border-dark-border">
+                            <h3 className="text-xl font-heading font-bold text-white mb-4">
+                              Tertarik? Isi Form Assessment
+                            </h3>
+                            <p className="text-gray-400 mb-6">
+                              Lengkapi form di bawah ini untuk mendapatkan penawaran yang sesuai dengan kebutuhan Anda. Tim kami akan menghubungi Anda untuk follow up dalam 1-2 hari kerja.
+                            </p>
+                            <WebAssessmentForm />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </CardContent>

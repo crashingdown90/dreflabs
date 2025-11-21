@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { log } from '@/lib/logger'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
+import { CardSkeleton } from '@/components/ui/Loading'
 import { Plus, Edit, Trash2, Tag, ExternalLink } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { log } from '@/lib/logger'
 
 interface Project {
   id: number
@@ -102,7 +103,7 @@ export default function AdminProjectsPage() {
 
       alert('Project deleted successfully!')
       fetchProjects() // Refresh list
-    } catch (error: any) {
+    } catch (error) {
       log.error('Error deleting project:', error)
       alert('Error deleting project. Please try again.')
     }
@@ -177,9 +178,12 @@ export default function AdminProjectsPage() {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {loading ? (
-          <div className="col-span-2 text-center py-12">
-            <p className="text-gray-400">Loading projects...</p>
-          </div>
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+          </>
         ) : filteredProjects.length === 0 ? (
           <div className="col-span-2 text-center py-12 bg-dark-secondary/50 border border-dark-border rounded-xl">
             <p className="text-gray-400 mb-4">No projects found</p>

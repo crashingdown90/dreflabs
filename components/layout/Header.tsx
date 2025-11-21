@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import RobotWolfLogo from '@/components/ui/RobotWolfLogo'
 
@@ -10,6 +11,16 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
+
+  const portfolioRef = useRef<HTMLDivElement>(null)
+  const servicesRef = useRef<HTMLDivElement>(null)
+
+  // Detect touch device
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,12 +51,47 @@ export default function Header() {
       if (event.key === 'Escape') {
         setOpenDropdown(null)
         setIsMobileMenuOpen(false)
+        setFocusedIndex(-1)
+      }
+
+      if (!openDropdown) return
+
+      const currentRef = openDropdown === 'portfolio' ? portfolioRef : servicesRef
+      const links = currentRef.current?.querySelectorAll('a')
+      if (!links) return
+
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault()
+          setFocusedIndex((prev) => (prev < links.length - 1 ? prev + 1 : prev))
+          break
+        case 'ArrowUp':
+          event.preventDefault()
+          setFocusedIndex((prev) => (prev > 0 ? prev - 1 : 0))
+          break
+        case 'Enter':
+          if (focusedIndex >= 0 && focusedIndex < links.length) {
+            event.preventDefault()
+            links[focusedIndex].click()
+          }
+          break
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [])
+  }, [openDropdown, focusedIndex])
+
+  // Focus management for keyboard navigation
+  useEffect(() => {
+    if (openDropdown && focusedIndex >= 0) {
+      const currentRef = openDropdown === 'portfolio' ? portfolioRef : servicesRef
+      const links = currentRef.current?.querySelectorAll('a')
+      if (links && links[focusedIndex]) {
+        (links[focusedIndex] as HTMLElement).focus()
+      }
+    }
+  }, [focusedIndex, openDropdown])
 
   return (
     <header
@@ -85,85 +131,191 @@ export default function Header() {
             <div
               className="relative"
               data-dropdown-container="portfolio"
-              onMouseEnter={() => setOpenDropdown('portfolio')}
-              onMouseLeave={() => setOpenDropdown(null)}
+              onMouseEnter={() => !isTouchDevice && setOpenDropdown('portfolio')}
+              onMouseLeave={() => !isTouchDevice && setOpenDropdown(null)}
             >
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   setOpenDropdown(openDropdown === 'portfolio' ? null : 'portfolio')
+                  setFocusedIndex(-1)
                 }}
                 className="text-gray-300 hover:text-white transition-colors duration-200 font-medium flex items-center gap-1"
                 aria-expanded={openDropdown === 'portfolio'}
                 aria-haspopup="true"
+                aria-controls="portfolio-menu"
               >
                 Portfolio
-                <ChevronDown size={16} className={cn("transition-transform", openDropdown === 'portfolio' && "rotate-180")} />
+                <ChevronDown
+                  size={16}
+                  className={cn(
+                    "transition-transform duration-200",
+                    openDropdown === 'portfolio' && "rotate-180"
+                  )}
+                />
               </button>
-              {openDropdown === 'portfolio' && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-dark-secondary border border-dark-border rounded-lg shadow-xl py-2 z-50">
-                  <Link
-                    href="/projects"
-                    onClick={() => setOpenDropdown(null)}
-                    className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-dark-bg transition-colors"
+              <AnimatePresence>
+                {openDropdown === 'portfolio' && (
+                  <motion.div
+                    ref={portfolioRef}
+                    id="portfolio-menu"
+                    role="menu"
+                    aria-orientation="vertical"
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.15, ease: 'easeOut' }}
+                    className="absolute top-full left-0 mt-2 w-56 bg-dark-secondary/95 backdrop-blur-xl border border-dark-border/50 rounded-lg shadow-2xl py-2 z-50 overflow-hidden"
                   >
-                    Tech Projects
-                  </Link>
-                  <Link
-                    href="/web-portfolio"
-                    onClick={() => setOpenDropdown(null)}
-                    className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-dark-bg transition-colors"
-                  >
-                    Web Development
-                  </Link>
-                  <Link
-                    href="/opensource"
-                    onClick={() => setOpenDropdown(null)}
-                    className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-dark-bg transition-colors"
-                  >
-                    Open Source
-                  </Link>
-                </div>
-              )}
+                    <Link
+                      href="/projects"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Tech Projects
+                    </Link>
+                    <Link
+                      href="/web-portfolio"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Web Development
+                    </Link>
+                    <Link
+                      href="/opensource"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Open Source
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Services Dropdown */}
             <div
               className="relative"
               data-dropdown-container="services"
-              onMouseEnter={() => setOpenDropdown('services')}
-              onMouseLeave={() => setOpenDropdown(null)}
+              onMouseEnter={() => !isTouchDevice && setOpenDropdown('services')}
+              onMouseLeave={() => !isTouchDevice && setOpenDropdown(null)}
             >
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   setOpenDropdown(openDropdown === 'services' ? null : 'services')
+                  setFocusedIndex(-1)
                 }}
                 className="text-gray-300 hover:text-white transition-colors duration-200 font-medium flex items-center gap-1"
                 aria-expanded={openDropdown === 'services'}
                 aria-haspopup="true"
+                aria-controls="services-menu"
               >
                 Services
-                <ChevronDown size={16} className={cn("transition-transform", openDropdown === 'services' && "rotate-180")} />
+                <ChevronDown
+                  size={16}
+                  className={cn(
+                    "transition-transform duration-200",
+                    openDropdown === 'services' && "rotate-180"
+                  )}
+                />
               </button>
-              {openDropdown === 'services' && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-dark-secondary border border-dark-border rounded-lg shadow-xl py-2 z-50">
-                  <Link
-                    href="/services"
-                    onClick={() => setOpenDropdown(null)}
-                    className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-dark-bg transition-colors"
+              <AnimatePresence>
+                {openDropdown === 'services' && (
+                  <motion.div
+                    ref={servicesRef}
+                    id="services-menu"
+                    role="menu"
+                    aria-orientation="vertical"
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.15, ease: 'easeOut' }}
+                    className="absolute top-full left-0 mt-2 w-56 bg-dark-secondary/95 backdrop-blur-xl border border-dark-border/50 rounded-lg shadow-2xl py-2 z-50 overflow-hidden"
                   >
-                    All Services
-                  </Link>
-                  <Link
-                    href="/political-consulting"
-                    onClick={() => setOpenDropdown(null)}
-                    className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-dark-bg transition-colors"
-                  >
-                    Political Consulting
-                  </Link>
-                </div>
-              )}
+                    <Link
+                      href="/services"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      All Services
+                    </Link>
+                    <div className="border-t border-dark-border/50 my-1"></div>
+                    <Link
+                      href="/services#web-development"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Web Development
+                    </Link>
+                    <Link
+                      href="/services#big-data"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Big Data & AI
+                    </Link>
+                    <Link
+                      href="/services#cyber-security"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Cyber Security
+                    </Link>
+                    <Link
+                      href="/services#e-government"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      E-Government
+                    </Link>
+                    <div className="border-t border-dark-border/50 my-1"></div>
+                    <Link
+                      href="/political-consulting"
+                      role="menuitem"
+                      onClick={() => {
+                        setOpenDropdown(null)
+                        setFocusedIndex(-1)
+                      }}
+                      className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-dark-bg/50 transition-all duration-150 focus:outline-none focus:bg-dark-bg/50 focus:text-white"
+                    >
+                      Political Consulting
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Blog */}
@@ -253,6 +405,36 @@ export default function Header() {
                 >
                   All Services
                 </Link>
+                <div className="border-t border-dark-border/30 my-2 mx-4"></div>
+                <Link
+                  href="/services#web-development"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-dark-secondary block"
+                >
+                  Web Development
+                </Link>
+                <Link
+                  href="/services#big-data"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-dark-secondary block"
+                >
+                  Big Data & AI
+                </Link>
+                <Link
+                  href="/services#cyber-security"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-dark-secondary block"
+                >
+                  Cyber Security
+                </Link>
+                <Link
+                  href="/services#e-government"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-dark-secondary block"
+                >
+                  E-Government
+                </Link>
+                <div className="border-t border-dark-border/30 my-2 mx-4"></div>
                 <Link
                   href="/political-consulting"
                   onClick={() => setIsMobileMenuOpen(false)}

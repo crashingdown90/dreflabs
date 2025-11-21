@@ -56,6 +56,26 @@ db.exec(`
   )
 `)
 
+// Web assessments table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS web_assessments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    company TEXT,
+    project_type TEXT NOT NULL,
+    budget TEXT NOT NULL,
+    timeline TEXT NOT NULL,
+    description TEXT NOT NULL,
+    status TEXT DEFAULT 'new',
+    notes TEXT,
+    submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    read INTEGER DEFAULT 0,
+    followed_up_at DATETIME
+  )
+`)
+
 // Page views table for analytics
 db.exec(`
   CREATE TABLE IF NOT EXISTS page_views (
@@ -194,6 +214,11 @@ console.log('Creating indexes...')
 db.exec(`
   CREATE INDEX IF NOT EXISTS idx_comments_post ON comments(post_slug);
   CREATE INDEX IF NOT EXISTS idx_comments_approved ON comments(approved);
+  CREATE INDEX IF NOT EXISTS idx_contacts_read ON contacts(read);
+  CREATE INDEX IF NOT EXISTS idx_contacts_submitted ON contacts(submitted_at);
+  CREATE INDEX IF NOT EXISTS idx_web_assessments_status ON web_assessments(status);
+  CREATE INDEX IF NOT EXISTS idx_web_assessments_read ON web_assessments(read);
+  CREATE INDEX IF NOT EXISTS idx_web_assessments_submitted ON web_assessments(submitted_at);
   CREATE INDEX IF NOT EXISTS idx_page_views_path ON page_views(page_path);
   CREATE INDEX IF NOT EXISTS idx_page_views_date ON page_views(viewed_at);
   CREATE INDEX IF NOT EXISTS idx_admin_sessions_token ON admin_sessions(refresh_token);

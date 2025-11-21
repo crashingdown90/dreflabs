@@ -46,8 +46,9 @@ export interface JWTPayload {
   exp?: number
 }
 
-export interface AuthResponse {
-  success: boolean
+// Success response for auth endpoints
+export interface AuthSuccessResponse {
+  success: true
   message?: string
   accessToken?: string
   refreshToken?: string
@@ -58,6 +59,15 @@ export interface AuthResponse {
     role: string
   }
 }
+
+// Error response for auth endpoints
+export interface AuthErrorResponse {
+  success: false
+  error: string
+}
+
+// Union type for auth responses
+export type AuthResponse = AuthSuccessResponse | AuthErrorResponse
 
 export interface LoginRequest {
   username: string

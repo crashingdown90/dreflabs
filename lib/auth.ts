@@ -1,19 +1,40 @@
 import { SignJWT, jwtVerify } from 'jose'
 import { log } from '@/lib/logger'
 import bcrypt from 'bcryptjs'
-import { JWTPayload } from '@/types/auth'
+import { JWTPayload, AdminUser } from '@/types/auth'
 import { getEnv } from './env'
 
 // Get validated environment variables
 const env = getEnv()
 
-// Edge runtime detection
-const isEdgeRuntime = typeof (globalThis as any).EdgeRuntime === 'string' ||
+// Edge runtime detection with proper type
+interface EdgeGlobal {
+  EdgeRuntime?: string
+}
+
+const isEdgeRuntime = typeof (globalThis as unknown as EdgeGlobal).EdgeRuntime === 'string' ||
                       process.env.NEXT_RUNTIME === 'edge' ||
                       typeof process.versions?.node === 'undefined'
 
 const JWT_SECRET = new TextEncoder().encode(env.JWT_SECRET)
 const REFRESH_TOKEN_SECRET = new TextEncoder().encode(env.REFRESH_TOKEN_SECRET)
+
+/**
+ * Type guard to validate JWT payload structure
+ * @param payload - Payload to validate
+ * @returns True if payload matches JWTPayload structure
+ */
+function isValidJWTPayload(payload: unknown): payload is JWTPayload {
+  if (!payload || typeof payload !== 'object') return false
+
+  const p = payload as Record<string, unknown>
+  return (
+    typeof p.userId === 'number' &&
+    typeof p.username === 'string' &&
+    typeof p.email === 'string' &&
+    typeof p.role === 'string'
+  )
+}
 
 /**
  * Generate a JWT access token
@@ -25,7 +46,8 @@ export async function generateAccessToken(
   payload: Omit<JWTPayload, 'iat' | 'exp'>,
   expiresIn: string = '1h'
 ): Promise<string> {
-  const token = await new SignJWT(payload as any)
+  // jose's SignJWT accepts Record<string, unknown>
+  const token = await new SignJWT(payload as Record<string, unknown>)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime(expiresIn)
@@ -44,7 +66,8 @@ export async function generateRefreshToken(
   payload: Omit<JWTPayload, 'iat' | 'exp'>,
   expiresIn: string = '7d'
 ): Promise<string> {
-  const token = await new SignJWT(payload as any)
+  // jose's SignJWT accepts Record<string, unknown>
+  const token = await new SignJWT(payload as Record<string, unknown>)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime(expiresIn)
@@ -71,15 +94,10 @@ export async function verifyAccessToken(token: string): Promise<JWTPayload | nul
     }
 
     const { payload } = await jwtVerify(token, JWT_SECRET)
-    // Validate that payload has required fields
-    if (
-      payload &&
-      typeof payload.userId === 'number' &&
-      typeof payload.username === 'string' &&
-      typeof payload.email === 'string' &&
-      typeof payload.role === 'string'
-    ) {
-      return payload as unknown as JWTPayload
+
+    // Use type guard to validate and narrow type
+    if (isValidJWTPayload(payload)) {
+      return payload
     }
     return null
   } catch (error) {
@@ -106,15 +124,10 @@ export async function verifyRefreshToken(token: string): Promise<JWTPayload | nu
     }
 
     const { payload } = await jwtVerify(token, REFRESH_TOKEN_SECRET)
-    // Validate that payload has required fields
-    if (
-      payload &&
-      typeof payload.userId === 'number' &&
-      typeof payload.username === 'string' &&
-      typeof payload.email === 'string' &&
-      typeof payload.role === 'string'
-    ) {
-      return payload as unknown as JWTPayload
+
+    // Use type guard to validate and narrow type
+    if (isValidJWTPayload(payload)) {
+      return payload
     }
     return null
   } catch (error) {
@@ -186,10 +199,10 @@ export function isExpired(expirationDate: string): boolean {
 /**
  * Sanitize user data for client response (remove sensitive fields)
  * @param user - User object from database
- * @returns Sanitized user object
+ * @returns Sanitized user object without sensitive fields
  */
-export function sanitizeUser(user: any) {
-  const { password_hash, ...sanitized } = user
+export function sanitizeUser(user: AdminUser): Omit<AdminUser, 'password_hash'> {
+  const { password_hash: _passwordHash, ...sanitized } = user
   return sanitized
 }
 

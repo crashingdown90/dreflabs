@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, FormEvent, Suspense } from 'react'
-import { log } from '@/lib/logger'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff, Lock, User } from 'lucide-react'
@@ -32,7 +31,7 @@ function LoginForm() {
           setCsrfToken(data.csrfToken)
         }
       } catch (error) {
-        log.error('Failed to fetch CSRF token:', error)
+        console.error('Failed to fetch CSRF token:', error)
       }
     }
     fetchCsrfToken()
@@ -68,7 +67,7 @@ function LoginForm() {
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
-      log.error('Login error:', err)
+      console.error('Login error:', err)
     } finally {
       setIsLoading(false)
     }

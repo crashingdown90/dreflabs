@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { log } from '@/lib/logger'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { Upload, Trash2, Copy, ExternalLink, Search, Grid, List, Image as ImageIcon } from 'lucide-react'
@@ -43,7 +42,7 @@ export default function AdminMediaPage() {
       setFiles([...newFiles, ...files])
       alert(`${selectedFiles.length} file(s) uploaded successfully!`)
     } catch (error) {
-      log.error('Error uploading files:', error)
+      console.error('Error uploading files:', error)
       alert('Error uploading files. Please try again.')
     } finally {
       setUploading(false)
@@ -61,7 +60,7 @@ export default function AdminMediaPage() {
       setFiles(files.filter(f => f.id !== id))
       alert('File deleted successfully!')
     } catch (error) {
-      log.error('Error deleting file:', error)
+      console.error('Error deleting file:', error)
       alert('Error deleting file. Please try again.')
     }
   }

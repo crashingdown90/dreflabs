@@ -8,6 +8,9 @@ import Badge from '@/components/ui/Badge'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/structured-data'
+import { JsonLd } from '@/components/seo/JsonLd'
+import ShareButtons from '@/components/blog/ShareButtons'
 
 // Temporarily disabled for deployment - js-yaml version conflict
 // export async function generateStaticParams() {
@@ -44,8 +47,30 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     notFound()
   }
 
+  const articleSchema = generateArticleSchema({
+    title: post.title,
+    description: post.excerpt,
+    image: `https://dreflabs.com${post.coverImage}`,
+    datePublished: post.date,
+    author: {
+      name: post.author.name,
+      jobTitle: post.author.title,
+      url: 'https://dreflabs.com',
+    },
+    url: `https://dreflabs.com/blog/${params.slug}`,
+    tags: post.tags,
+  })
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://dreflabs.com' },
+    { name: 'Blog', url: 'https://dreflabs.com/blog' },
+    { name: post.title, url: `https://dreflabs.com/blog/${params.slug}` },
+  ])
+
   return (
     <div className="min-h-screen pt-20 md:pt-28 pb-20">
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/blog"
@@ -76,7 +101,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 text-gray-400 text-sm">
+            <div className="flex flex-wrap items-center gap-4 text-gray-400 text-sm mb-6">
               <div className="flex items-center gap-2">
                 <Calendar size={16} />
                 <span>{formatDate(post.date)}</span>
@@ -86,6 +111,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 <span>{post.readTime} min read</span>
               </div>
             </div>
+
+            {/* Share Buttons */}
+            <ShareButtons
+              url={`https://dreflabs.com/blog/${params.slug}`}
+              title={post.title}
+              description={post.excerpt}
+            />
           </header>
 
           {/* Content */}

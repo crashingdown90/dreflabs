@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { log } from '@/lib/logger'
 import { useRouter } from 'next/navigation'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
@@ -78,7 +77,7 @@ export default function NewBlogPostPage() {
       alert(`Blog post ${status === 'draft' ? 'saved as draft' : 'published'} successfully!`)
       router.push('/admin/blog')
     } catch (error: any) {
-      log.error('Error saving post:', error)
+      console.error('Error saving post:', error)
       alert(error.message || 'Error saving post. Please try again.')
     } finally {
       setSaving(false)

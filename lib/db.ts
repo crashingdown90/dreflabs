@@ -25,7 +25,7 @@ export function getDb(): Database.Database {
       // Create connection
       db = new Database(dbPath, {
         // Enable verbose mode in development
-        verbose: process.env.NODE_ENV === 'development' ? console.log : undefined,
+        verbose: process.env.NODE_ENV === 'development' ? (msg: string) => log.debug(`[SQL] ${msg}`) : undefined,
       })
 
       // Enable foreign keys
@@ -48,24 +48,26 @@ export function getDb(): Database.Database {
       log.info('✅ Database connection established')
     } catch (error) {
       connectionAttempts++
+      db = null
       log.error(`❌ Database connection error (attempt ${connectionAttempts}):`, error)
 
       if (connectionAttempts >= MAX_CONNECTION_ATTEMPTS) {
+        connectionAttempts = 0 // Reset for next time
         throw new Error(
           `Failed to connect to database after ${MAX_CONNECTION_ATTEMPTS} attempts. Please check database configuration.`
         )
       }
 
-      // Retry after a short delay
-      if (connectionAttempts < MAX_CONNECTION_ATTEMPTS) {
-        log.info(`Retrying database connection in 1 second...`)
-        setTimeout(() => {
-          db = null
-          getDb()
-        }, 1000)
+      // Synchronous retry with exponential backoff
+      log.info(`Retrying database connection in ${connectionAttempts} second(s)...`)
+      const delay = connectionAttempts * 1000
+      const start = Date.now()
+      while (Date.now() - start < delay) {
+        // Busy wait for synchronous delay
       }
 
-      throw error
+      // Recursive retry
+      return getDb()
     }
   }
 
