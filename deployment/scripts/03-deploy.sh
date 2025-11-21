@@ -43,8 +43,25 @@ fi
 
 # Get GitHub repo from existing release
 CURRENT_RELEASE=$(readlink -f ${WEB_ROOT}/current)
-cd ${CURRENT_RELEASE}
-GITHUB_REPO=$(git remote get-url origin | sed 's/.*github.com[:/]\(.*\)\.git/\1/' | sed 's/.*github.com[:/]\(.*\)/\1/')
+
+if [ -d "${CURRENT_RELEASE}/.git" ]; then
+    cd ${CURRENT_RELEASE}
+    REMOTE_URL=$(git remote get-url origin 2>/dev/null || echo "")
+
+    if [[ "$REMOTE_URL" == *"github.com"* ]]; then
+        # Extract repo from URL (handles both HTTPS and SSH)
+        GITHUB_REPO=$(echo "$REMOTE_URL" | sed -E 's|.*github\.com[:/]||' | sed 's|\.git$||')
+    fi
+fi
+
+# Fallback: ask for repo if not found
+if [ -z "$GITHUB_REPO" ]; then
+    echo -e "${RED}Could not detect GitHub repo from current release.${NC}"
+    echo -e "${YELLOW}Please provide GitHub repo (e.g., username/repo):${NC}"
+    read -p "> " GITHUB_REPO
+fi
+
+echo -e "Using repo: ${GREEN}${GITHUB_REPO}${NC}"
 
 echo -e "\n${YELLOW}[1/6] Pulling latest code from GitHub...${NC}"
 git clone --depth 1 https://github.com/${GITHUB_REPO}.git ${RELEASE_DIR}
