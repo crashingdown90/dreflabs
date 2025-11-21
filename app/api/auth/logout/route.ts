@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     log.error('Logout error:', error)
     return NextResponse.json(
-      { success: false, message: 'Internal server error' } as AuthResponse,
+      { success: false, error: 'Internal server error' } as AuthResponse,
       { status: 500 }
     )
   }

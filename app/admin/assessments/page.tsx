@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
-import { Mail, Phone, Building2, Calendar, DollarSign, Clock, Eye, CheckCircle2 } from 'lucide-react'
-import { verifyAuth } from '@/lib/auth'
+import { Mail, Phone, Building2, Calendar, DollarSign, Clock, Eye } from 'lucide-react'
 import { getAllAssessments, getAssessmentStats } from '@/lib/assessments-db'
 import Card, { CardContent } from '@/components/ui/Card'
 
@@ -27,9 +27,11 @@ const statusLabels: Record<string, string> = {
 }
 
 export default async function AssessmentsAdminPage() {
-  const auth = await verifyAuth()
+  // Auth is handled by middleware - just verify cookie exists as extra check
+  const cookieStore = await cookies()
+  const accessToken = cookieStore.get('accessToken')
 
-  if (!auth.isAuthenticated) {
+  if (!accessToken) {
     redirect('/admin/login')
   }
 

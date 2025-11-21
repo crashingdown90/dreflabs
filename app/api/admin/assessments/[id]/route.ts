@@ -9,8 +9,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const auth = await verifyAuth()
-    if (!auth.isAuthenticated) {
+    const authHeader = request.headers.get('authorization')
+    const auth = await verifyAuth(authHeader, request)
+    if (!auth) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -40,8 +41,9 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const auth = await verifyAuth()
-    if (!auth.isAuthenticated) {
+    const authHeader = request.headers.get('authorization')
+    const auth = await verifyAuth(authHeader, request)
+    if (!auth) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -81,8 +83,9 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const auth = await verifyAuth()
-    if (!auth.isAuthenticated) {
+    const authHeader = request.headers.get('authorization')
+    const auth = await verifyAuth(authHeader, request)
+    if (!auth) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

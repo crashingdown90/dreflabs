@@ -42,7 +42,8 @@ export default function ServicesPage() {
             const hasForm = 'hasAssessmentForm' in service && service.hasAssessmentForm
             return (
               <ScrollReveal key={service.id} delay={index * 0.1}>
-                <Card hover glow className="p-8" id={service.id}>
+                <div id={service.id}>
+                <Card hover glow className="p-8">
                   <CardContent className="p-0">
                     <div className="flex flex-col md:flex-row gap-6">
                       <div className="flex-shrink-0">
@@ -104,6 +105,7 @@ export default function ServicesPage() {
                     </div>
                   </CardContent>
                 </Card>
+                </div>
               </ScrollReveal>
             )
           })}

@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     if (!refreshToken) {
       return NextResponse.json(
-        { success: false, message: 'Refresh token required' } as AuthResponse,
+        { success: false, error: 'Refresh token required' } as AuthResponse,
         { status: 400 }
       )
     }
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     if (!payload) {
       return NextResponse.json(
-        { success: false, message: 'Invalid refresh token' } as AuthResponse,
+        { success: false, error: 'Invalid refresh token' } as AuthResponse,
         { status: 401 }
       )
     }
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
 
     if (!session) {
       return NextResponse.json(
-        { success: false, message: 'Session not found' } as AuthResponse,
+        { success: false, error: 'Session not found' } as AuthResponse,
         { status: 401 }
       )
     }
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     if (isExpired(session.expires_at)) {
       deleteSession(refreshToken)
       return NextResponse.json(
-        { success: false, message: 'Session expired' } as AuthResponse,
+        { success: false, error: 'Session expired' } as AuthResponse,
         { status: 401 }
       )
     }
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     if (!admin || admin.is_active !== 1) {
       deleteSession(refreshToken)
       return NextResponse.json(
-        { success: false, message: 'User not found or inactive' } as AuthResponse,
+        { success: false, error: 'User not found or inactive' } as AuthResponse,
         { status: 401 }
       )
     }
@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     log.error('Token refresh error:', error)
     return NextResponse.json(
-      { success: false, message: 'Internal server error' } as AuthResponse,
+      { success: false, error: 'Internal server error' } as AuthResponse,
       { status: 500 }
     )
   }

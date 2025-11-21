@@ -100,7 +100,7 @@ export function sanitizeUrl(url: string): string {
   if (!url) return ''
   
   // Remove whitespace
-  let sanitized = url.trim()
+  const sanitized = url.trim()
   
   // Only allow http and https protocols
   if (!sanitized.match(/^https?:\/\//i)) {

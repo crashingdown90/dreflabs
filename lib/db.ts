@@ -25,7 +25,7 @@ export function getDb(): Database.Database {
       // Create connection
       db = new Database(dbPath, {
         // Enable verbose mode in development
-        verbose: process.env.NODE_ENV === 'development' ? (msg: string) => log.debug(`[SQL] ${msg}`) : undefined,
+        verbose: process.env.NODE_ENV === 'development' ? (msg: unknown) => log.debug(`[SQL] ${String(msg)}`) : undefined,
       })
 
       // Enable foreign keys

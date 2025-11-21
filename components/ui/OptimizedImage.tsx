@@ -33,14 +33,6 @@ export default function OptimizedImage({
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-  // Auto-detect if source is WebP
-  const isWebP = src.endsWith('.webp')
-
-  // Generate fallback path (replace .webp with .jpg or .png)
-  const fallbackSrc = isWebP
-    ? src.replace('.webp', '.jpg')
-    : src
-
   if (hasError) {
     return (
       <div

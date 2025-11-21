@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
-import { Mail, Phone, Building2, Calendar, DollarSign, Clock, ArrowLeft, Save, Trash2, Loader2 } from 'lucide-react'
+import { Mail, Phone, Building2, DollarSign, Clock, ArrowLeft, Save, Trash2, Loader2 } from 'lucide-react'
 import Card, { CardContent } from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 

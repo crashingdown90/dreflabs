@@ -10,7 +10,7 @@ interface ShareButtonsProps {
   className?: string
 }
 
-export default function ShareButtons({ url, title, description, className = '' }: ShareButtonsProps) {
+export default function ShareButtons({ url, title, className = '' }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
 
   const shareUrls = {

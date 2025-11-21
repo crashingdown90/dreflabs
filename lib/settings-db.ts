@@ -185,7 +185,7 @@ export function getGroupedSettings(): Record<string, Record<string, any>> {
     } else if (setting.setting_type === 'json') {
       try {
         value = setting.setting_value ? JSON.parse(setting.setting_value) : null
-      } catch (error) {
+      } catch {
         value = null
       }
     }

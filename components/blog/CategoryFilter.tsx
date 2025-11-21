@@ -1,7 +1,6 @@
 'use client'
 
 import { X } from 'lucide-react'
-import Badge from '@/components/ui/Badge'
 
 interface CategoryFilterProps {
   categories: string[]
