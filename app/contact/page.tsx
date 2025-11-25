@@ -39,7 +39,7 @@ export default function ContactPage() {
         setStatus('error')
         setErrorMessage(data.error || 'Something went wrong')
       }
-    } catch (error) {
+    } catch (_error) {
       setStatus('error')
       setErrorMessage('Failed to send message. Please try again.')
     }

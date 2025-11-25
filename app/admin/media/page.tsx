@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { Upload, Trash2, Copy, ExternalLink, Search, Grid, List, Image as ImageIcon } from 'lucide-react'
@@ -199,10 +200,12 @@ export default function AdminMediaPage() {
               {/* Image Preview */}
               <div className="aspect-square bg-dark-bg overflow-hidden relative">
                 {file.type.startsWith('image/') ? (
-                  <img
+                  <Image
                     src={file.url}
                     alt={file.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    unoptimized
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -259,12 +262,14 @@ export default function AdminMediaPage() {
             >
               <div className="flex items-center gap-4">
                 {/* Thumbnail */}
-                <div className="w-16 h-16 bg-dark-bg rounded-lg overflow-hidden flex-shrink-0">
+                <div className="w-16 h-16 bg-dark-bg rounded-lg overflow-hidden flex-shrink-0 relative">
                   {file.type.startsWith('image/') ? (
-                    <img
+                    <Image
                       src={file.url}
                       alt={file.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      unoptimized
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

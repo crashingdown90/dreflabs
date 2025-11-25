@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, Phone, Building2, DollarSign, Clock, ArrowLeft, Save, Trash2, Loader2 } from 'lucide-react'
@@ -45,11 +45,7 @@ export default function AssessmentDetailPage() {
   const [notes, setNotes] = useState('')
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    fetchAssessment()
-  }, [id])
-
-  const fetchAssessment = async () => {
+  const fetchAssessment = useCallback(async () => {
     try {
       const response = await fetch(`/api/admin/assessments/${id}`)
       if (!response.ok) throw new Error('Failed to fetch assessment')
@@ -58,12 +54,16 @@ export default function AssessmentDetailPage() {
       setAssessment(data)
       setStatus(data.status)
       setNotes(data.notes || '')
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to load assessment')
     } finally {
       setLoading(false)
     }
-  }
+  }, [id])
+
+  useEffect(() => {
+    fetchAssessment()
+  }, [fetchAssessment])
 
   const handleUpdate = async () => {
     setUpdating(true)
@@ -81,7 +81,7 @@ export default function AssessmentDetailPage() {
       const updated = await response.json()
       setAssessment(updated)
       alert('Assessment updated successfully!')
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to update assessment')
     } finally {
       setUpdating(false)
@@ -102,7 +102,7 @@ export default function AssessmentDetailPage() {
       if (!response.ok) throw new Error('Failed to delete assessment')
 
       router.push('/admin/assessments')
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to delete assessment')
       setDeleting(false)
     }

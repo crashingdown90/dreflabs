@@ -99,7 +99,7 @@ export async function PUT(
     const body = await request.json()
 
     // Sanitize inputs to prevent XSS attacks
-    const sanitizedData: any = {}
+    const sanitizedData: Record<string, unknown> = {}
     if (body.slug !== undefined) sanitizedData.slug = sanitizeText(body.slug)
     if (body.title !== undefined) sanitizedData.title = sanitizeText(body.title)
     if (body.excerpt !== undefined) sanitizedData.excerpt = sanitizeText(body.excerpt)
@@ -143,11 +143,12 @@ export async function PUT(
       message: 'Blog post updated successfully',
       data: post,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     log.error('Error updating blog post:', error)
-    
+
     // Handle unique constraint violation (duplicate slug)
-    if (error.message?.includes('UNIQUE constraint failed')) {
+    const errMessage = error instanceof Error ? error.message : ''
+    if (errMessage.includes('UNIQUE constraint failed')) {
       return NextResponse.json(
         { success: false, message: 'A blog post with this slug already exists' },
         { status: 409 }

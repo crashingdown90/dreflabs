@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { CardSkeleton } from '@/components/ui/Loading'
@@ -34,11 +35,7 @@ export default function AdminBlogPage() {
   const [filter, setFilter] = useState<string>('all')
   const [categories, setCategories] = useState<{ category: string; count: number }[]>([])
 
-  useEffect(() => {
-    fetchPosts()
-  }, [filter])
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       setLoading(true)
 
@@ -78,7 +75,11 @@ export default function AdminBlogPage() {
       log.error('Error fetching posts:', error)
       setLoading(false)
     }
-  }
+  }, [filter, router])
+
+  useEffect(() => {
+    fetchPosts()
+  }, [fetchPosts])
 
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this blog post?')) return
@@ -204,11 +205,13 @@ export default function AdminBlogPage() {
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Cover Image */}
                   {post.cover_image && (
-                    <div className="lg:w-48 h-32 bg-dark-bg rounded-lg overflow-hidden flex-shrink-0">
-                      <img
+                    <div className="lg:w-48 h-32 bg-dark-bg rounded-lg overflow-hidden flex-shrink-0 relative">
+                      <Image
                         src={post.cover_image}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        unoptimized={post.cover_image.startsWith('/uploads')}
                       />
                     </div>
                   )}

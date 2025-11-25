@@ -109,7 +109,7 @@ export async function PUT(request: NextRequest) {
       if (setting.setting_key.includes('email')) {
         try {
           sanitizedValue = sanitizeEmail(sanitizedValue)
-        } catch (error) {
+        } catch (_error) {
           return NextResponse.json(
             { success: false, message: `Invalid email format for ${setting.setting_key}` },
             { status: 400 }
@@ -119,7 +119,7 @@ export async function PUT(request: NextRequest) {
         if (sanitizedValue && sanitizedValue.startsWith('http')) {
           try {
             sanitizedValue = sanitizeUrl(sanitizedValue)
-          } catch (error) {
+          } catch (_error) {
             return NextResponse.json(
               { success: false, message: `Invalid URL format for ${setting.setting_key}` },
               { status: 400 }

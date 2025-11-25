@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { Save, ArrowLeft, Eye, Upload } from 'lucide-react'
@@ -267,11 +268,13 @@ export default function NewBlogPostPage() {
               Upload Image
             </Button>
             {formData.coverImage && (
-              <div className="mt-4 rounded-lg overflow-hidden">
-                <img
+              <div className="mt-4 rounded-lg overflow-hidden relative h-32">
+                <Image
                   src={formData.coverImage}
                   alt="Cover preview"
-                  className="w-full h-32 object-cover"
+                  fill
+                  className="object-cover"
+                  unoptimized={formData.coverImage.startsWith('/uploads')}
                 />
               </div>
             )}

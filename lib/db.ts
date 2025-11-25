@@ -103,14 +103,16 @@ export function executeWithRetry<T>(
     try {
       const database = getDb()
       return operation(database)
-    } catch (error: any) {
-      lastError = error
+    } catch (error: unknown) {
+      lastError = error instanceof Error ? error : new Error(String(error))
 
       // Retry on SQLITE_BUSY or SQLITE_LOCKED errors
+      const errCode = (error as { code?: string })?.code
+      const errMessage = error instanceof Error ? error.message : ''
       if (
-        error.code === 'SQLITE_BUSY' ||
-        error.code === 'SQLITE_LOCKED' ||
-        error.message?.includes('database is locked')
+        errCode === 'SQLITE_BUSY' ||
+        errCode === 'SQLITE_LOCKED' ||
+        errMessage.includes('database is locked')
       ) {
         if (attempt < maxRetries) {
           log.warn(`Database busy, retrying (attempt ${attempt}/${maxRetries})...`)
@@ -140,8 +142,9 @@ export function checkDatabaseHealth(): { healthy: boolean; message: string } {
     const db = getDb()
     db.prepare('SELECT 1').get()
     return { healthy: true, message: 'Database is healthy' }
-  } catch (error: any) {
-    return { healthy: false, message: error.message || 'Database health check failed' }
+  } catch (error: unknown) {
+    const errMessage = error instanceof Error ? error.message : 'Database health check failed'
+    return { healthy: false, message: errMessage }
   }
 }
 

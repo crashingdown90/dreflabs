@@ -2,6 +2,20 @@ import nodemailer from 'nodemailer'
 import { log } from '@/lib/logger'
 import type { Transporter } from 'nodemailer'
 
+/**
+ * Escape HTML special characters to prevent XSS in email templates
+ */
+function escapeHtml(text: string): string {
+  const htmlEscapes: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }
+  return text.replace(/[&<>"']/g, (char) => htmlEscapes[char] || char)
+}
+
 interface EmailOptions {
   to: string
   subject: string
@@ -54,8 +68,9 @@ function initializeEmailTransporter(): Transporter {
     log.info('✅ Email transporter initialized successfully')
 
     return transporter
-  } catch (error: any) {
-    configurationError = error.message || 'Failed to initialize email transporter'
+  } catch (error: unknown) {
+    const errMessage = error instanceof Error ? error.message : 'Failed to initialize email transporter'
+    configurationError = errMessage
     emailConfigured = false
     log.error('❌ Email configuration error:', error)
     throw error
@@ -113,15 +128,17 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 
     log.info('✅ Email sent successfully:', info.messageId)
     return true
-  } catch (error: any) {
-    log.error('❌ Error sending email:', error.message || error)
+  } catch (error: unknown) {
+    const errMessage = error instanceof Error ? error.message : String(error)
+    log.error('❌ Error sending email:', errMessage)
 
     // Log specific error types
-    if (error.code === 'EAUTH') {
+    const errorCode = (error as { code?: string })?.code
+    if (errorCode === 'EAUTH') {
       log.error('Authentication failed. Please check SMTP credentials.')
-    } else if (error.code === 'ECONNECTION') {
+    } else if (errorCode === 'ECONNECTION') {
       log.error('Connection failed. Please check SMTP host and port.')
-    } else if (error.code === 'ETIMEDOUT') {
+    } else if (errorCode === 'ETIMEDOUT') {
       log.error('Connection timed out. Please check network connectivity.')
     }
 
@@ -136,7 +153,14 @@ export async function sendContactNotification(
   company?: string,
   serviceInterest?: string
 ): Promise<boolean> {
-  const subject = `New Contact Form Submission from ${name}`
+  // Escape all user inputs for HTML safety
+  const safeName = escapeHtml(name)
+  const safeEmail = escapeHtml(email)
+  const safeMessage = escapeHtml(message)
+  const safeCompany = company ? escapeHtml(company) : ''
+  const safeServiceInterest = serviceInterest ? escapeHtml(serviceInterest) : ''
+
+  const subject = `New Contact Form Submission from ${safeName}`
   const text = `
     New contact form submission:
 
@@ -151,12 +175,12 @@ export async function sendContactNotification(
 
   const html = `
     <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-    ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
-    ${serviceInterest ? `<p><strong>Service Interest:</strong> ${serviceInterest}</p>` : ''}
+    <p><strong>Name:</strong> ${safeName}</p>
+    <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+    ${safeCompany ? `<p><strong>Company:</strong> ${safeCompany}</p>` : ''}
+    ${safeServiceInterest ? `<p><strong>Service Interest:</strong> ${safeServiceInterest}</p>` : ''}
     <p><strong>Message:</strong></p>
-    <p>${message.replace(/\n/g, '<br>')}</p>
+    <p>${safeMessage.replace(/\n/g, '<br>')}</p>
   `
 
   return sendEmail({

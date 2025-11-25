@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { CardSkeleton } from '@/components/ui/Loading'
@@ -32,11 +33,7 @@ export default function AdminProjectsPage() {
   const [filter, setFilter] = useState<string>('all')
   const [categories, setCategories] = useState<{ category: string; count: number }[]>([])
 
-  useEffect(() => {
-    fetchProjects()
-  }, [filter])
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       setLoading(true)
 
@@ -78,7 +75,11 @@ export default function AdminProjectsPage() {
       log.error('Error fetching projects:', error)
       setLoading(false)
     }
-  }
+  }, [filter, router])
+
+  useEffect(() => {
+    fetchProjects()
+  }, [fetchProjects])
 
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this project?')) return
@@ -204,11 +205,13 @@ export default function AdminProjectsPage() {
               >
                 {/* Project Image */}
                 {project.image_url && (
-                  <div className="h-48 bg-dark-bg overflow-hidden">
-                    <img
+                  <div className="h-48 bg-dark-bg overflow-hidden relative">
+                    <Image
                       src={project.image_url}
                       alt={project.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      unoptimized={project.image_url.startsWith('/uploads')}
                     />
                   </div>
                 )}
