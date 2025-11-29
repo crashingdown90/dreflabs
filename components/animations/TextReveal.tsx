@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 interface TextRevealProps {
@@ -37,7 +37,7 @@ const Word = ({ children, progress, range }: any) => {
     return (
         <span className="relative mr-2 mt-2">
             <span className="absolute opacity-20">{children}</span>
-            <motion.span style={{ opacity: opacity }}>{children}</motion.span>
+            <m.span style={{ opacity: opacity }}>{children}</m.span>
         </span>
     )
 }

@@ -15,8 +15,8 @@ const config: Config = {
           light: '#E0E0E0',   // Light Silver
         },
         accent: {
-          cyan: '#FFFFFF',    // Monochrome: Pure White
-          blue: '#C0C0C0',    // Monochrome: Silver
+          cyan: '#00E5FF',    // Cyan for accents
+          blue: '#007AFF',    // Professional Blue
           white: '#FFFFFF',   // Pure White
           silver: '#C0C0C0',  // Silver
           gray: '#808080',    // Medium Gray

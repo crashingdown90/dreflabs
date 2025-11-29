@@ -64,8 +64,7 @@ export const metadata: Metadata = {
 }
 
 import CustomCursor from '@/components/ui/CustomCursor'
-
-// ... imports
+import MotionProvider from '@/components/providers/MotionProvider'
 
 export default function RootLayout({
   children,
@@ -75,12 +74,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans overflow-x-hidden`}>
-        <CustomCursor />
-        <div className="relative min-h-screen">
-          <Header />
-          <main className="relative z-10">{children}</main>
-          <Footer />
-        </div>
+        <MotionProvider>
+          <CustomCursor />
+          <div className="relative min-h-screen">
+            <Header />
+            <main className="relative z-10">{children}</main>
+            <Footer />
+          </div>
+        </MotionProvider>
       </body>
     </html>
   )

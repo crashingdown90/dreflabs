@@ -2,6 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Card, { CardContent, CardFooter } from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
+import ScrollReveal from '@/components/animations/ScrollReveal'
+import BlurText from '@/components/animations/BlurText'
+import GlitchText from '@/components/animations/GlitchText'
 import projectsData from '@/content/data/projects.json'
 
 export const metadata = {
@@ -13,15 +16,17 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen pt-20 md:pt-32 pb-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-white mb-4">
-            Projects
-          </h1>
-          <div className="w-20 h-1 bg-gradient-primary mx-auto mb-6"></div>
-          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Showcasing impactful solutions in big data, AI, cyber security, and e-government
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold text-white mb-4">
+              <GlitchText text="Projects" speed={0.5} />
+            </h1>
+            <div className="w-20 h-1 bg-gradient-primary mx-auto mb-6"></div>
+            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
+              <BlurText text="Showcasing impactful solutions in big data, AI, cyber security, and e-government" delay={0.2} />
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsData.map((project) => (

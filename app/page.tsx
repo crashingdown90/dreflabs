@@ -36,6 +36,7 @@ const organizationSchema = generateOrganizationSchema({
 const websiteSchema = generateWebSiteSchema('https://dreflabs.com', 'Dref Labs')
 
 import Marquee from '@/components/animations/Marquee'
+import Stats from '@/components/home/Stats'
 
 export default function Home() {
   return (
@@ -45,6 +46,7 @@ export default function Home() {
       <JsonLd data={websiteSchema} />
       <Hero />
       <Marquee items={['BIG DATA', 'AI & ML', 'CYBER SECURITY', 'E-GOVERNMENT', 'CLOUD COMPUTING', 'DIGITAL TRANSFORMATION']} speed={25} />
+      <Stats />
       <About />
       <Timeline />
       <Expertise />

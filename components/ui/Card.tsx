@@ -13,7 +13,7 @@ export default function Card({ children, className, hover = false, glow = false 
     <div
       className={cn(
         'rounded-xl glass-card',
-        hover && 'hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/10',
+        hover && 'hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent-blue/10 hover:border-accent-blue/30',
         glow && 'shadow-lg shadow-white/5 border-white/20',
         className
       )}

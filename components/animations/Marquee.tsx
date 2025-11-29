@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 interface MarqueeProps {
     items: string[]
@@ -13,7 +13,7 @@ export default function Marquee({ items, direction = 'left', speed = 20 }: Marqu
         <div className="relative flex overflow-hidden py-10 bg-dark-bg border-y border-white/5">
             <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-dark-bg via-transparent to-dark-bg" />
 
-            <motion.div
+            <m.div
                 className="flex whitespace-nowrap"
                 animate={{
                     x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'],
@@ -33,7 +33,7 @@ export default function Marquee({ items, direction = 'left', speed = 20 }: Marqu
                         {item}
                     </span>
                 ))}
-            </motion.div>
+            </m.div>
         </div>
     )
 }

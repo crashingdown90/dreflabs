@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import Magnetic from '@/components/animations/Magnetic'
 import RobotWolfLogo from '@/components/ui/RobotWolfLogo'
@@ -161,7 +161,7 @@ export default function Header() {
               </button>
               <AnimatePresence>
                 {openDropdown === 'portfolio' && (
-                  <motion.div
+                  <m.div
                     ref={portfolioRef}
                     id="portfolio-menu"
                     role="menu"
@@ -205,7 +205,7 @@ export default function Header() {
                     >
                       Open Source
                     </Link>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -241,7 +241,7 @@ export default function Header() {
               </Magnetic>
               <AnimatePresence>
                 {openDropdown === 'services' && (
-                  <motion.div
+                  <m.div
                     ref={servicesRef}
                     id="services-menu"
                     role="menu"
@@ -320,7 +320,7 @@ export default function Header() {
                     >
                       Political Consulting
                     </Link>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>

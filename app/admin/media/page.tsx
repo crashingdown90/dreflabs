@@ -1,27 +1,56 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
-import { Upload, Trash2, Copy, ExternalLink, Search, Grid, List, Image as ImageIcon } from 'lucide-react'
+import { Upload, Trash2, Copy, ExternalLink, Search, Grid, List, Image as ImageIcon, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface MediaFile {
-  id: string
-  name: string
-  url: string
-  size: number
-  type: string
-  uploadedAt: string
+  id: number
+  filename: string
+  original_name: string
+  file_url: string
+  file_size: number
+  mime_type: string
+  created_at: string
+  width?: number
+  height?: number
 }
 
 export default function AdminMediaPage() {
   const [files, setFiles] = useState<MediaFile[]>([])
   const [uploading, setUploading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [deleting, setDeleting] = useState<number | null>(null)
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [searchQuery, setSearchQuery] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Fetch media files from API
+  const fetchFiles = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/media', {
+        credentials: 'include',
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success && data.data?.files) {
+          setFiles(data.data.files)
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching media files:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchFiles()
+  }, [fetchFiles])
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files
@@ -30,21 +59,29 @@ export default function AdminMediaPage() {
     setUploading(true)
 
     try {
-      // TODO: Implement file upload API
-      const newFiles: MediaFile[] = Array.from(selectedFiles).map((file, index) => ({
-        id: `file-${Date.now()}-${index}`,
-        name: file.name,
-        url: URL.createObjectURL(file),
-        size: file.size,
-        type: file.type,
-        uploadedAt: new Date().toISOString()
-      }))
+      // Upload files one by one
+      for (const file of Array.from(selectedFiles)) {
+        const formData = new FormData()
+        formData.append('file', file)
 
-      setFiles([...newFiles, ...files])
+        const response = await fetch('/api/admin/media/upload', {
+          method: 'POST',
+          credentials: 'include',
+          body: formData,
+        })
+
+        if (!response.ok) {
+          const data = await response.json()
+          throw new Error(data.message || 'Upload failed')
+        }
+      }
+
+      // Refresh file list
+      await fetchFiles()
       alert(`${selectedFiles.length} file(s) uploaded successfully!`)
     } catch (error) {
       console.error('Error uploading files:', error)
-      alert('Error uploading files. Please try again.')
+      alert(error instanceof Error ? error.message : 'Error uploading files. Please try again.')
     } finally {
       setUploading(false)
       if (fileInputRef.current) {
@@ -53,21 +90,36 @@ export default function AdminMediaPage() {
     }
   }
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this file?')) return
 
+    setDeleting(id)
+
     try {
-      // TODO: Implement delete API
+      const response = await fetch(`/api/admin/media/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message || 'Delete failed')
+      }
+
+      // Remove from local state
       setFiles(files.filter(f => f.id !== id))
       alert('File deleted successfully!')
     } catch (error) {
       console.error('Error deleting file:', error)
-      alert('Error deleting file. Please try again.')
+      alert(error instanceof Error ? error.message : 'Error deleting file. Please try again.')
+    } finally {
+      setDeleting(null)
     }
   }
 
   const copyToClipboard = (url: string) => {
-    navigator.clipboard.writeText(url)
+    const fullUrl = window.location.origin + url
+    navigator.clipboard.writeText(fullUrl)
     alert('URL copied to clipboard!')
   }
 
@@ -80,8 +132,19 @@ export default function AdminMediaPage() {
   }
 
   const filteredFiles = files.filter(file =>
-    file.name.toLowerCase().includes(searchQuery.toLowerCase())
+    file.original_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    file.filename.toLowerCase().includes(searchQuery.toLowerCase())
   )
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center py-16">
+          <Loader2 className="text-white animate-spin" size={48} />
+        </div>
+      </AdminLayout>
+    )
+  }
 
   return (
     <AdminLayout>
@@ -96,12 +159,16 @@ export default function AdminMediaPage() {
             ref={fileInputRef}
             type="file"
             multiple
-            accept="image/*"
+            accept="image/jpeg,image/png,image/gif,image/webp"
             onChange={handleFileSelect}
             className="hidden"
           />
           <Button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
-            <Upload size={20} className="mr-2" />
+            {uploading ? (
+              <Loader2 size={20} className="mr-2 animate-spin" />
+            ) : (
+              <Upload size={20} className="mr-2" />
+            )}
             {uploading ? 'Uploading...' : 'Upload Files'}
           </Button>
         </div>
@@ -116,20 +183,20 @@ export default function AdminMediaPage() {
         <div className="bg-dark-secondary/50 border border-dark-border rounded-xl p-6">
           <p className="text-gray-400 text-sm mb-1">Images</p>
           <p className="text-white text-3xl font-bold">
-            {files.filter(f => f.type.startsWith('image/')).length}
+            {files.filter(f => f.mime_type.startsWith('image/')).length}
           </p>
         </div>
         <div className="bg-dark-secondary/50 border border-dark-border rounded-xl p-6">
           <p className="text-gray-400 text-sm mb-1">Total Size</p>
           <p className="text-white text-3xl font-bold">
-            {formatFileSize(files.reduce((acc, f) => acc + f.size, 0))}
+            {formatFileSize(files.reduce((acc, f) => acc + f.file_size, 0))}
           </p>
         </div>
         <div className="bg-dark-secondary/50 border border-dark-border rounded-xl p-6">
           <p className="text-gray-400 text-sm mb-1">This Month</p>
           <p className="text-white text-3xl font-bold">
             {files.filter(f => {
-              const uploadDate = new Date(f.uploadedAt)
+              const uploadDate = new Date(f.created_at)
               const now = new Date()
               return uploadDate.getMonth() === now.getMonth() && uploadDate.getFullYear() === now.getFullYear()
             }).length}
@@ -199,10 +266,10 @@ export default function AdminMediaPage() {
             >
               {/* Image Preview */}
               <div className="aspect-square bg-dark-bg overflow-hidden relative">
-                {file.type.startsWith('image/') ? (
+                {file.mime_type.startsWith('image/') ? (
                   <Image
-                    src={file.url}
-                    alt={file.name}
+                    src={file.file_url}
+                    alt={file.original_name}
                     fill
                     className="object-cover"
                     unoptimized
@@ -212,18 +279,18 @@ export default function AdminMediaPage() {
                     <ImageIcon className="text-gray-500" size={48} />
                   </div>
                 )}
-                
+
                 {/* Overlay Actions */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                   <button
-                    onClick={() => copyToClipboard(file.url)}
+                    onClick={() => copyToClipboard(file.file_url)}
                     className="p-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
                     title="Copy URL"
                   >
                     <Copy size={20} />
                   </button>
                   <a
-                    href={file.url}
+                    href={file.file_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
@@ -233,21 +300,26 @@ export default function AdminMediaPage() {
                   </a>
                   <button
                     onClick={() => handleDelete(file.id)}
-                    className="p-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-400 transition-colors"
+                    disabled={deleting === file.id}
+                    className="p-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-400 transition-colors disabled:opacity-50"
                     title="Delete"
                   >
-                    <Trash2 size={20} />
+                    {deleting === file.id ? (
+                      <Loader2 size={20} className="animate-spin" />
+                    ) : (
+                      <Trash2 size={20} />
+                    )}
                   </button>
                 </div>
               </div>
 
               {/* File Info */}
               <div className="p-3">
-                <p className="text-white text-sm font-medium truncate mb-1" title={file.name}>
-                  {file.name}
+                <p className="text-white text-sm font-medium truncate mb-1" title={file.original_name}>
+                  {file.original_name}
                 </p>
                 <p className="text-gray-400 text-xs">
-                  {formatFileSize(file.size)}
+                  {formatFileSize(file.file_size)}
                 </p>
               </div>
             </div>
@@ -263,10 +335,10 @@ export default function AdminMediaPage() {
               <div className="flex items-center gap-4">
                 {/* Thumbnail */}
                 <div className="w-16 h-16 bg-dark-bg rounded-lg overflow-hidden flex-shrink-0 relative">
-                  {file.type.startsWith('image/') ? (
+                  {file.mime_type.startsWith('image/') ? (
                     <Image
-                      src={file.url}
-                      alt={file.name}
+                      src={file.file_url}
+                      alt={file.original_name}
                       fill
                       className="object-cover"
                       unoptimized
@@ -280,9 +352,9 @@ export default function AdminMediaPage() {
 
                 {/* File Info */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-white font-medium truncate">{file.name}</p>
+                  <p className="text-white font-medium truncate">{file.original_name}</p>
                   <p className="text-gray-400 text-sm">
-                    {formatFileSize(file.size)} • {new Date(file.uploadedAt).toLocaleDateString()}
+                    {formatFileSize(file.file_size)} • {new Date(file.created_at).toLocaleDateString()}
                   </p>
                 </div>
 
@@ -291,12 +363,12 @@ export default function AdminMediaPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => copyToClipboard(file.url)}
+                    onClick={() => copyToClipboard(file.file_url)}
                   >
                     <Copy size={16} className="mr-2" />
                     Copy URL
                   </Button>
-                  <a href={file.url} target="_blank" rel="noopener noreferrer">
+                  <a href={file.file_url} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="sm">
                       <ExternalLink size={16} />
                     </Button>
@@ -305,9 +377,14 @@ export default function AdminMediaPage() {
                     variant="outline"
                     size="sm"
                     onClick={() => handleDelete(file.id)}
+                    disabled={deleting === file.id}
                     className="text-red-400 border-red-400/30 hover:bg-red-400/10"
                   >
-                    <Trash2 size={16} />
+                    {deleting === file.id ? (
+                      <Loader2 size={16} className="animate-spin" />
+                    ) : (
+                      <Trash2 size={16} />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -318,4 +395,3 @@ export default function AdminMediaPage() {
     </AdminLayout>
   )
 }
-

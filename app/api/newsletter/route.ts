@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { addSubscriber, isSubscribed } from '@/lib/newsletter-db'
 import { logger } from '@/lib/logger'
 import { rateLimit } from '@/lib/rate-limit'
+import { sendWelcomeEmail, isEmailConfigured } from '@/lib/email'
 
 // POST /api/newsletter - Subscribe to newsletter
 export async function POST(request: NextRequest) {
@@ -41,8 +42,12 @@ export async function POST(request: NextRequest) {
     // Add subscriber
     const subscriber = addSubscriber(email)
 
-    // TODO: Send welcome email (optional)
-    // await sendWelcomeEmail(email)
+    // Send welcome email (non-blocking, don't fail subscription if email fails)
+    if (isEmailConfigured()) {
+      sendWelcomeEmail(email).catch((err) => {
+        logger.warn('Failed to send welcome email', { email, error: err })
+      })
+    }
 
     logger.info('New newsletter subscriber', { email })
 

@@ -19,7 +19,7 @@ export default function Button({
 
   const variants = {
     primary:
-      'bg-gradient-primary text-dark-bg hover:shadow-lg hover:shadow-white/20 hover:scale-105 active:scale-95 border border-transparent',
+      'bg-gradient-to-r from-gray-200 via-white to-gray-400 text-dark-bg hover:from-accent-blue hover:to-accent-cyan hover:text-white hover:shadow-lg hover:shadow-accent-blue/20 hover:scale-105 active:scale-95 border border-transparent',
     secondary:
       'bg-dark-secondary text-white border border-white/20 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 hover:bg-white/5',
     outline:

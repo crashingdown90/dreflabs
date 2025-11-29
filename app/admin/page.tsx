@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import AdminLayout from '@/components/admin/AdminLayout'
-import { FileText, Folder, Code2, MessageSquare, Mail, Users, TrendingUp, Eye, Clock } from 'lucide-react'
+import { FileText, Folder, Code2, MessageSquare, Mail, Users, TrendingUp, Eye, Clock, Loader2 } from 'lucide-react'
 
 interface DashboardStats {
   blogPosts: number
@@ -17,19 +17,39 @@ interface DashboardStats {
 }
 
 export default function AdminDashboardPage() {
-  const [stats] = useState<DashboardStats>({
-    blogPosts: 3,
-    techProjects: 4,
-    webPortfolio: 5,
-    openSource: 3,
-    politicalConsulting: 3,
+  const [stats, setStats] = useState<DashboardStats>({
+    blogPosts: 0,
+    techProjects: 0,
+    webPortfolio: 0,
+    openSource: 0,
+    politicalConsulting: 0,
     comments: 0,
     messages: 0,
     newsletter: 0,
   })
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // TODO: Fetch real stats from API
+    async function fetchStats() {
+      try {
+        const response = await fetch('/api/admin/stats', {
+          credentials: 'include',
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          if (data.success && data.data?.stats) {
+            setStats(data.data.stats)
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchStats()
   }, [])
 
   const totalContent = stats.blogPosts + stats.techProjects + stats.webPortfolio + stats.openSource + stats.politicalConsulting
@@ -53,7 +73,11 @@ export default function AdminDashboardPage() {
             <span className="text-xs text-blue-400 font-medium">Total</span>
           </div>
           <p className="text-gray-400 text-sm mb-1">Total Content</p>
-          <p className="text-white text-3xl font-bold">{totalContent}</p>
+          {loading ? (
+            <Loader2 className="text-white animate-spin" size={28} />
+          ) : (
+            <p className="text-white text-3xl font-bold">{totalContent}</p>
+          )}
         </div>
 
         {/* Blog Posts */}

@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Database, Brain, Shield, Building2, FileText, CheckCircle, Code2 } from 'lucide-react'
 import ScrollReveal from '@/components/animations/ScrollReveal'
+import SplitText from '@/components/animations/SplitText'
+import ShinyText from '@/components/animations/ShinyText'
 import Card, { CardContent } from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import WebAssessmentForm from '@/components/forms/WebAssessmentForm'
@@ -27,11 +29,13 @@ export default function ServicesPage() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
-              Services
+              <SplitText text="Services" animation="fadeUp" staggerChildren={0.05} />
             </h1>
             <div className="w-20 h-1 bg-gradient-primary mx-auto mb-6"></div>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Comprehensive technology consulting and implementation services for government and enterprise
+              Comprehensive technology consulting and implementation services for{' '}
+              <ShinyText text="government" className="font-semibold" /> and{' '}
+              <ShinyText text="enterprise" className="font-semibold" />
             </p>
           </div>
         </ScrollReveal>

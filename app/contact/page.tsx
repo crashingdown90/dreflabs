@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { Mail, Linkedin, Send } from 'lucide-react'
 import ScrollReveal from '@/components/animations/ScrollReveal'
+import LetterPullUp from '@/components/animations/LetterPullUp'
+import Aurora from '@/components/animations/Aurora'
 import Input, { Textarea } from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import Card, { CardContent } from '@/components/ui/Card'
@@ -46,12 +48,21 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 md:pt-32 pb-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-20 md:pt-32 pb-20 relative overflow-hidden">
+      {/* Aurora Background */}
+      <Aurora
+        className="fixed inset-0 z-0"
+        colors={['#00E5FF', '#007AFF', '#C0C0C0']}
+        speed={15}
+        blur={150}
+        opacity={0.15}
+      />
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
-              Get in Touch
+              <LetterPullUp text="Get in Touch" staggerChildren={0.05} />
             </h1>
             <div className="w-20 h-1 bg-gradient-primary mx-auto mb-6"></div>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
