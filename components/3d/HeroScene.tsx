@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { MeshDistortMaterial, Sphere, Float, Environment } from '@react-three/drei'
+import { MeshDistortMaterial, Sphere, Float } from '@react-three/drei'
 
 export default function HeroScene() {
     return (
@@ -36,7 +36,7 @@ export default function HeroScene() {
                     </Sphere>
                 </Float>
 
-                <Environment preset="city" />
+                <pointLight position={[-10, -10, -10]} intensity={0.5} />
             </Canvas>
         </div>
     )
