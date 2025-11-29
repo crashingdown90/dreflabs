@@ -19,17 +19,17 @@ export default function Button({
 
   const variants = {
     primary:
-      'bg-gradient-primary text-dark-bg hover:shadow-lg hover:shadow-white/30 hover:scale-105',
+      'bg-gradient-primary text-dark-bg hover:shadow-lg hover:shadow-white/20 hover:scale-105 active:scale-95 border border-transparent',
     secondary:
-      'bg-dark-secondary text-white border border-dark-border hover:border-white/50 hover:shadow-lg hover:shadow-white/20',
+      'bg-dark-secondary text-white border border-white/20 hover:border-white/50 hover:shadow-lg hover:shadow-white/10 hover:bg-white/5',
     outline:
-      'border-2 border-white text-white hover:bg-white/10 hover:shadow-lg hover:shadow-white/20',
+      'border border-white/30 text-white hover:bg-white/10 hover:border-white/60 hover:shadow-lg hover:shadow-white/10',
     ghost:
-      'text-gray-300 hover:text-white hover:bg-dark-secondary',
+      'text-gray-400 hover:text-white hover:bg-white/5',
   }
 
   const sizes = {
-    sm: 'px-4 py-3 text-sm',
+    sm: 'px-4 py-2 text-sm',
     md: 'px-6 py-3 text-base',
     lg: 'px-8 py-4 text-lg',
   }

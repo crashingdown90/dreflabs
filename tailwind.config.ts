@@ -10,9 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#808080',
-          dark: '#404040',
-          light: '#A0A0A0',
+          DEFAULT: '#C0C0C0', // Silver
+          dark: '#101010',    // Near Black
+          light: '#E0E0E0',   // Light Silver
         },
         accent: {
           cyan: '#FFFFFF',    // Monochrome: Pure White
@@ -20,24 +20,27 @@ const config: Config = {
           white: '#FFFFFF',   // Pure White
           silver: '#C0C0C0',  // Silver
           gray: '#808080',    // Medium Gray
+          platinum: '#E5E4E2', // Platinum
         },
         dark: {
-          bg: '#000000',      // Pure Black
-          secondary: '#151515',
-          tertiary: '#202020',
-          border: '#303030',
+          bg: '#050505',      // Deep Black
+          secondary: '#0A0A0A', // Slightly lighter black
+          tertiary: '#121212',  // Dark Gray
+          border: '#2A2A2A',    // Dark Border
         },
         metallic: {
           silver: '#C0C0C0',
           'dark-silver': '#A0A0A0',
           chrome: '#E0E0E0',
+          steel: '#434B4D',
         },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #A0A0A0 0%, #FFFFFF 50%, #C0C0C0 100%)', // Chrome effect
-        'gradient-monochrome': 'linear-gradient(135deg, #A0A0A0 0%, #FFFFFF 50%, #C0C0C0 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #E0E0E0 0%, #FFFFFF 50%, #C0C0C0 100%)', // High contrast silver
+        'gradient-monochrome': 'linear-gradient(135deg, #1A1A1A 0%, #000000 100%)', // Dark gradient
         'gradient-metallic': 'linear-gradient(135deg, #808080 0%, #C0C0C0 50%, #E0E0E0 100%)',
         'gradient-silver': 'linear-gradient(135deg, #606060 0%, #C0C0C0 50%, #808080 100%)',
+        'gradient-dark-glass': 'linear-gradient(180deg, rgba(20, 20, 20, 0.7) 0%, rgba(10, 10, 10, 0.9) 100%)',
         'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },

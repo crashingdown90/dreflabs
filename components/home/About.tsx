@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
 import ScrollReveal from '@/components/animations/ScrollReveal'
 import Card, { CardContent } from '@/components/ui/Card'
+import TextReveal from '@/components/animations/TextReveal'
 
 const stats = [
   { label: 'Years Experience', value: 17, suffix: '+' },
@@ -62,31 +63,25 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
           <ScrollReveal direction="left">
             <div className="prose prose-invert max-w-none">
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-6">
-                With over 17 years of experience in IT, I specialize in transforming complex
-                data challenges into actionable insights and building innovative digital
-                government solutions. My journey began in 2008 with ethical hacking and
-                security, evolving through enterprise infrastructure and cyber security, big
-                data analytics, and now focusing on AI/ML and e-government transformation.
-              </p>
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-6">
-                Throughout my career, I've had the privilege of working with government
-                institutions and enterprises, implementing large-scale big data solutions,
-                developing AI-powered analytics platforms, and architecting secure digital
-                transformation initiatives.
-              </p>
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                My mission is to leverage cutting-edge technology to solve real-world
-                problems, particularly in the public sector, where data-driven decision
-                making can have profound impacts on society.
-              </p>
+              <TextReveal
+                text="With over 17 years of experience in IT, I specialize in transforming complex data challenges into actionable insights and building innovative digital government solutions. My journey began in 2008 with ethical hacking and security, evolving through enterprise infrastructure and cyber security, big data analytics, and now focusing on AI/ML and e-government transformation."
+                className="text-base sm:text-lg text-gray-300 leading-relaxed mb-6"
+              />
+              <TextReveal
+                text="Throughout my career, I've had the privilege of working with government institutions and enterprises, implementing large-scale big data solutions, developing AI-powered analytics platforms, and architecting secure digital transformation initiatives."
+                className="text-base sm:text-lg text-gray-300 leading-relaxed mb-6"
+              />
+              <TextReveal
+                text="My mission is to leverage cutting-edge technology to solve real-world problems, particularly in the public sector, where data-driven decision making can have profound impacts on society."
+                className="text-base sm:text-lg text-gray-300 leading-relaxed"
+              />
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="right">
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat, index) => (
-                <Card key={index} className="text-center p-6" hover glow>
+                <Card key={index} className="text-center p-6 glass-card" hover glow>
                   <CardContent className="p-0">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                     <p className="text-gray-400 mt-2 font-medium">{stat.label}</p>

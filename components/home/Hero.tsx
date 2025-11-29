@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import ParticleBackground from '@/components/animations/ParticleBackground'
+import HeroScene from '@/components/3d/HeroScene'
 import { motion } from 'framer-motion'
 
 const titles = [
@@ -48,6 +49,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <HeroScene />
       <ParticleBackground />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
@@ -59,8 +61,8 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full p-1 bg-gradient-primary">
-              <div className="w-full h-full rounded-full overflow-hidden border-4 border-dark-bg">
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-white via-gray-400 to-gray-800 animate-gradient">
+              <div className="w-full h-full rounded-full overflow-hidden border-4 border-black shadow-2xl shadow-white/20">
                 <Image
                   src="/images/Drefan.png"
                   alt="Drefan Mardiawan"

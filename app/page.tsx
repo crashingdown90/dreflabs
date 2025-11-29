@@ -2,7 +2,7 @@ import Hero from '@/components/home/Hero'
 import About from '@/components/home/About'
 import Timeline from '@/components/home/Timeline'
 import Expertise from '@/components/home/Expertise'
-import FeaturedProjects from '@/components/home/FeaturedProjects'
+import BentoFeaturedProjects from '@/components/home/BentoFeaturedProjects'
 import RecentPosts from '@/components/home/RecentPosts'
 import {
   generatePersonSchema,
@@ -35,6 +35,8 @@ const organizationSchema = generateOrganizationSchema({
 
 const websiteSchema = generateWebSiteSchema('https://dreflabs.com', 'Dref Labs')
 
+import Marquee from '@/components/animations/Marquee'
+
 export default function Home() {
   return (
     <>
@@ -42,10 +44,11 @@ export default function Home() {
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
       <Hero />
+      <Marquee items={['BIG DATA', 'AI & ML', 'CYBER SECURITY', 'E-GOVERNMENT', 'CLOUD COMPUTING', 'DIGITAL TRANSFORMATION']} speed={25} />
       <About />
       <Timeline />
       <Expertise />
-      <FeaturedProjects />
+      <BentoFeaturedProjects />
       <RecentPosts />
     </>
   )

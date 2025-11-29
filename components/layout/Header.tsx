@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import Magnetic from '@/components/animations/Magnetic'
 import RobotWolfLogo from '@/components/ui/RobotWolfLogo'
 
 export default function Header() {
@@ -98,7 +99,7 @@ export default function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-dark-bg/80 backdrop-blur-lg border-b border-dark-border shadow-lg'
+          ? 'bg-dark-bg/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20'
           : 'bg-transparent'
       )}
     >
@@ -112,20 +113,24 @@ export default function Header() {
           {/* Desktop Navigation - Organized by Categories */}
           <div className="hidden md:flex items-center space-x-6">
             {/* Home */}
-            <Link
-              href="/"
-              className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
-            >
-              Home
-            </Link>
+            <Magnetic>
+              <Link
+                href="/"
+                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+              >
+                Home
+              </Link>
+            </Magnetic>
 
             {/* About */}
-            <Link
-              href="/about"
-              className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
-            >
-              About
-            </Link>
+            <Magnetic>
+              <Link
+                href="/about"
+                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+              >
+                About
+              </Link>
+            </Magnetic>
 
             {/* Portfolio Dropdown */}
             <div
@@ -165,7 +170,7 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.15, ease: 'easeOut' }}
-                    className="absolute top-full left-0 mt-2 w-56 bg-dark-secondary/95 backdrop-blur-xl border border-dark-border/50 rounded-lg shadow-2xl py-2 z-50 overflow-hidden"
+                    className="absolute top-full left-0 mt-2 w-56 glass-strong border border-white/10 rounded-lg shadow-2xl py-2 z-50 overflow-hidden"
                   >
                     <Link
                       href="/projects"
@@ -212,26 +217,28 @@ export default function Header() {
               onMouseEnter={() => !isTouchDevice && setOpenDropdown('services')}
               onMouseLeave={() => !isTouchDevice && setOpenDropdown(null)}
             >
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setOpenDropdown(openDropdown === 'services' ? null : 'services')
-                  setFocusedIndex(-1)
-                }}
-                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium flex items-center gap-1"
-                aria-expanded={openDropdown === 'services'}
-                aria-haspopup="true"
-                aria-controls="services-menu"
-              >
-                Services
-                <ChevronDown
-                  size={16}
-                  className={cn(
-                    "transition-transform duration-200",
-                    openDropdown === 'services' && "rotate-180"
-                  )}
-                />
-              </button>
+              <Magnetic>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setOpenDropdown(openDropdown === 'services' ? null : 'services')
+                    setFocusedIndex(-1)
+                  }}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium flex items-center gap-1"
+                  aria-expanded={openDropdown === 'services'}
+                  aria-haspopup="true"
+                  aria-controls="services-menu"
+                >
+                  Services
+                  <ChevronDown
+                    size={16}
+                    className={cn(
+                      "transition-transform duration-200",
+                      openDropdown === 'services' && "rotate-180"
+                    )}
+                  />
+                </button>
+              </Magnetic>
               <AnimatePresence>
                 {openDropdown === 'services' && (
                   <motion.div
@@ -319,20 +326,24 @@ export default function Header() {
             </div>
 
             {/* Blog */}
-            <Link
-              href="/blog"
-              className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
-            >
-              Blog
-            </Link>
+            <Magnetic>
+              <Link
+                href="/blog"
+                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+              >
+                Blog
+              </Link>
+            </Magnetic>
 
             {/* Contact */}
-            <Link
-              href="/contact"
-              className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
-            >
-              Contact
-            </Link>
+            <Magnetic>
+              <Link
+                href="/contact"
+                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+              >
+                Contact
+              </Link>
+            </Magnetic>
           </div>
 
           {/* Mobile Menu Button */}

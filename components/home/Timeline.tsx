@@ -70,7 +70,7 @@ export default function Timeline() {
         <div className="hidden lg:block">
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-gray-700 via-gray-500 to-gray-200"></div>
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
 
             {/* Events */}
             <div className="grid grid-cols-5 gap-4 relative">
@@ -80,9 +80,9 @@ export default function Timeline() {
                   <ScrollReveal key={index} delay={index * 0.1}>
                     <div className="flex flex-col items-center">
                       <div
-                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center mb-4 shadow-lg`}
+                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center mb-4 shadow-lg shadow-white/10 border border-white/20`}
                       >
-                        <Icon className="text-white" size={28} />
+                        <Icon className="text-white drop-shadow-md" size={28} />
                       </div>
                       <div className="text-center">
                         <p className="text-sm sm:text-base text-white font-bold mb-2">{event.year}</p>

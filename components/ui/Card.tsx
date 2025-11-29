@@ -12,9 +12,9 @@ export default function Card({ children, className, hover = false, glow = false 
   return (
     <div
       className={cn(
-        'rounded-xl border border-dark-border bg-dark-secondary/50 backdrop-blur-sm',
-        hover && 'transition-all duration-300 hover:-translate-y-2 hover:shadow-xl active:scale-95',
-        glow && 'hover:shadow-white/20 hover:border-white/50',
+        'rounded-xl glass-card',
+        hover && 'hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/10',
+        glow && 'shadow-lg shadow-white/5 border-white/20',
         className
       )}
     >

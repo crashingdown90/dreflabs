@@ -37,10 +37,10 @@ export default function Expertise() {
             const Icon = iconMap[item.icon as keyof typeof iconMap]
             return (
               <ScrollReveal key={item.id} delay={index * 0.1}>
-                <Card hover glow className="h-full">
+                <Card hover glow className="h-full glass-card">
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-lg bg-gradient-primary mb-4">
-                      <Icon className="text-white" size={28} />
+                    <div className="flex items-center justify-center w-16 h-16 rounded-lg bg-gradient-to-br from-white/10 to-white/5 border border-white/10 mb-4 shadow-inner">
+                      <Icon className="text-white drop-shadow-glow" size={28} />
                     </div>
                     <h3 className="text-lg sm:text-xl font-heading font-semibold text-white mb-3">
                       {item.title}

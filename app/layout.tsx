@@ -63,6 +63,10 @@ export const metadata: Metadata = {
   },
 }
 
+import CustomCursor from '@/components/ui/CustomCursor'
+
+// ... imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,6 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans overflow-x-hidden`}>
+        <CustomCursor />
         <div className="relative min-h-screen">
           <Header />
           <main className="relative z-10">{children}</main>
